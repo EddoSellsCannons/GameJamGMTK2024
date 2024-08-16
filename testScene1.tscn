@@ -6,11 +6,11 @@
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
-position = Vector2(242.5, 225.5)
-scale = Vector2(30.3125, 28.1875)
+position = Vector2(124, 322.5)
+scale = Vector2(15.5, 40.3125)
 texture = ExtResource("1_8o0lm")
 
 [node name="Sprite2D2" type="Sprite2D" parent="."]
-position = Vector2(681, 365)
+position = Vector2(118, 255)
 scale = Vector2(10.375, 10.6875)
 texture = ExtResource("1_8o0lm")
