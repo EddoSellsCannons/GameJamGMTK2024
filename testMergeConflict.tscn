@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://i1uxcedcjhg6"]
+[gd_scene load_steps=3 format=3 uid="uid://i1uxcedcjhg6"]
 
 [ext_resource type="Texture2D" uid="uid://cgioadomsorki" path="res://Image & Music/moon.png" id="1_vcbau"]
+[ext_resource type="Texture2D" uid="uid://y40gltiy5dy3" path="res://Image & Music/AxeSprite2x2.png" id="2_emrql"]
 
 [node name="Node2D" type="Node2D"]
 
@@ -11,3 +12,7 @@ scale = Vector2(24.25, 22.75)
 texture = ExtResource("1_vcbau")
 
 [node name="change me" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(865, 273)
+scale = Vector2(17.5625, 17.625)
+texture = ExtResource("2_emrql")
