@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ko4x54fe31hc"
-path="res://.godot/imported/telepathy.png-7966b740e1fce9f6156009761e853572.ctex"
+uid="uid://y40gltiy5dy3"
+path="res://.godot/imported/AxeSprite2x2.png-38318d0e1b2a9be24361e718f030307f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Images & Music/telepathy.png"
-dest_files=["res://.godot/imported/telepathy.png-7966b740e1fce9f6156009761e853572.ctex"]
+source_file="res://Image & Music/AxeSprite2x2.png"
+dest_files=["res://.godot/imported/AxeSprite2x2.png-38318d0e1b2a9be24361e718f030307f.ctex"]
 
 [params]
 

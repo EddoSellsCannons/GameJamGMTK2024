@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b0agn24urojgn"
-path="res://.godot/imported/mxr8dq.png-5ae5dea1863c69cfc601f7bd3a0c4c8b.ctex"
+uid="uid://cgioadomsorki"
+path="res://.godot/imported/moon.png-fbdc6553707a2f4468c5f217438bd7c2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Images & Music/mxr8dq.png"
-dest_files=["res://.godot/imported/mxr8dq.png-5ae5dea1863c69cfc601f7bd3a0c4c8b.ctex"]
+source_file="res://Image & Music/moon.png"
+dest_files=["res://.godot/imported/moon.png-fbdc6553707a2f4468c5f217438bd7c2.ctex"]
 
 [params]
 
