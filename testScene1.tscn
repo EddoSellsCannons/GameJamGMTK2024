@@ -11,6 +11,6 @@ scale = Vector2(30.3125, 28.1875)
 texture = ExtResource("1_8o0lm")
 
 [node name="Sprite2D2" type="Sprite2D" parent="."]
-position = Vector2(414, 550)
+position = Vector2(681, 365)
 scale = Vector2(10.375, 10.6875)
 texture = ExtResource("1_8o0lm")
