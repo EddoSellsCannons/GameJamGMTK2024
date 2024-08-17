@@ -13,10 +13,9 @@ var rng = RandomNumberGenerator.new()
 @onready var gameManager = $".."
 
 func _ready() -> void:
-	await get_tree().create_timer(1).timeout 
+	await get_tree().create_timer(0.5).timeout 
 	spawnObstacles()
 	for i in range(50):
-		#await get_tree().create_timer(0.1).timeout 
 		spawnEnemy()
 
 func _on_spawn_timer_timeout() -> void:
@@ -37,7 +36,7 @@ func spawnEnemy():
 	gameManager.add_child(enemyToAdd)
 
 func spawnObstacles():
-	for i in range(50):
+	for i in range(100):
 		var coords = Vector2(rng.randf_range(-5000, 5000), rng.randf_range(-5000, 5000))
 		var t = treeObstacle.instantiate()
 		t.position = coords

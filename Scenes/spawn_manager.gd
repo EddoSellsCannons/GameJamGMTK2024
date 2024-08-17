@@ -1,4 +1,5 @@
 extends Node2D
+var rng = RandomNumberGenerator.new()
 
 @onready var S_microbe = preload("res://Scenes/s_microbe.tscn")
 @onready var M_microbe = preload("res://Scenes/m_microbe.tscn")
@@ -17,7 +18,15 @@ func _on_spawn_timer_timeout() -> void:
 	spawnEnemy()
 
 func spawnEnemy():
-	var enemyToAdd = enemyList.pick_random().instantiate()
+	var enemyTypeToSpawn = rng.randi_range(0, 100)
+	var enemyIndex
+	if enemyTypeToSpawn >= 0 and enemyTypeToSpawn <= 70:
+		enemyIndex = 0
+	elif enemyTypeToSpawn >= 71 and enemyTypeToSpawn <= 94:
+		enemyIndex = 1
+	elif enemyTypeToSpawn >= 95 and enemyTypeToSpawn <= 100:
+		enemyIndex = 2
+	var enemyToAdd = enemyList[enemyIndex].instantiate()
 	var posToSpawn = get_tree().get_nodes_in_group("spawnpoint").pick_random().position
 	enemyToAdd.position = posToSpawn
 	gameManager.add_child(enemyToAdd)
