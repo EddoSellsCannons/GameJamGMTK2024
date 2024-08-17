@@ -1,7 +1,11 @@
 extends CharacterBody2D
 
-const SPEED = 100.0
-var size = 100
+var speed = 80.0
+var size = 100.0
+const sizeConsumeMultiplier = 0.05
+
+func _ready() -> void:
+	updateSizing()
 
 func _physics_process(delta: float) -> void:
 	handleInput()
@@ -9,15 +13,23 @@ func _physics_process(delta: float) -> void:
 
 func handleInput():
 	var moveDir = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
-	velocity = moveDir * SPEED
+	velocity = moveDir * speed
 
 func _on_hurtbox_area_entered(area: Area2D) -> void:
 	if area.is_in_group("enemy"):
 		if sizeCompare(area.size):
+			size += area.size * sizeConsumeMultiplier
+			speed = (size/80 * 100) #80% of size
 			area.queue_free()
+			updateSizing()
+			print(size)
 
 func sizeCompare(enemySize):
 	if size > (enemySize/80 * 100):
 		return true
 	else:
 		return false
+
+func updateSizing():
+	scale = Vector2(size/100, size/100)
+	#$Camera2D.zoom = Vector2(1 - size/1000, 1 - size/1000)

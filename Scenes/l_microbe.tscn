@@ -1,18 +1,43 @@
-[gd_scene load_steps=4 format=3 uid="uid://55vn2ilqqqak"]
+[gd_scene load_steps=7 format=3 uid="uid://55vn2ilqqqak"]
 
 [ext_resource type="Script" path="res://Scenes/l_microbe.gd" id="1_ytuyj"]
+[ext_resource type="Texture2D" uid="uid://q44ue8lmc40n" path="res://assets/micro sprites/Micro enemy 3.png" id="2_ckr5w"]
 
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_6hfmv"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_7x53u"]
+atlas = ExtResource("2_ckr5w")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jxmfh"]
+atlas = ExtResource("2_ckr5w")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_bpnt0"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7x53u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jxmfh")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_uew53"]
+radius = 13.0
 
 [node name="L_Microbe" type="Area2D" groups=["enemy"]]
 script = ExtResource("1_ytuyj")
+maxSpeed = 500.0
+maxSize = 500.0
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(1.99998, 1.00002)
-scale = Vector2(0.0546875, 0.0585938)
-texture = SubResource("NoiseTexture2D_6hfmv")
+[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_bpnt0")
+autoplay = "default"
+frame_progress = 0.505328
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_uew53")

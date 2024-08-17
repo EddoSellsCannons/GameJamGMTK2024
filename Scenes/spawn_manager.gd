@@ -8,6 +8,11 @@ extends Node2D
 
 @onready var gameManager = $".."
 
+func _ready() -> void:
+	await get_tree().create_timer(1).timeout 
+	for i in range(50):
+		spawnEnemy()
+
 func _on_spawn_timer_timeout() -> void:
 	spawnEnemy()
 

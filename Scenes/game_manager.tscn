@@ -1,8 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://cqdnvlyr08dp5"]
+[gd_scene load_steps=5 format=3 uid="uid://cqdnvlyr08dp5"]
 
-[ext_resource type="PackedScene" path="res://Scenes/microbePlayer1.tscn" id="1_ebnpy"]
+[ext_resource type="PackedScene" uid="uid://dff6k1qobyv1p" path="res://Scenes/microbePlayer1.tscn" id="1_ebnpy"]
 [ext_resource type="Script" path="res://Scenes/spawn_manager.gd" id="1_g7cea"]
-[ext_resource type="PackedScene" uid="uid://coji0kgrrb3hr" path="res://Scenes/s_microbe.tscn" id="2_mf4gc"]
 [ext_resource type="Texture2D" uid="uid://ddewjo0mpcvj0" path="res://Image & Music/tempBKG.png" id="3_inoqv"]
 [ext_resource type="Script" path="res://Scenes/camera_2d.gd" id="4_tpuux"]
 
@@ -26,7 +25,6 @@ texture = ExtResource("3_inoqv")
 position = Vector2(116, 85)
 
 [node name="Camera2D" type="Camera2D" parent="microbe1"]
-zoom = Vector2(0.3, 0.3)
 position_smoothing_enabled = true
 script = ExtResource("4_tpuux")
 
@@ -41,8 +39,5 @@ position = Vector2(0, 800)
 
 [node name="leftSpawn" type="Marker2D" parent="microbe1/Camera2D" groups=["spawnpoint"]]
 position = Vector2(-1000, 0)
-
-[node name="S_Microbe" parent="." instance=ExtResource("2_mf4gc")]
-position = Vector2(846, 468)
 
 [connection signal="timeout" from="spawnManager/spawnTimer" to="spawnManager" method="_on_spawn_timer_timeout"]
