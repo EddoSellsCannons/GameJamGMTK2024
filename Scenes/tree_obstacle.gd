@@ -11,12 +11,11 @@ func _ready() -> void:
 
 func _on_detection_radius_area_entered(area: Area2D) -> void:
 	if area.is_in_group("Player"):
-		print("throw proj")
-		launchProj(area.get_parent())
+		$AnimationPlayer.play("throwProjectile")
 
-func launchProj(player):
+func launchProj():
 	var projToLaunch = proj.instantiate()
-	projToLaunch.dir = (player.position - position).normalized()
+	projToLaunch.dir = (gameManager.player.position - position).normalized()
 	projToLaunch.position = position
 	gameManager.add_child(projToLaunch)
 

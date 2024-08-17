@@ -19,6 +19,7 @@ script = ExtResource("2_htlu3")
 autostart = true
 
 [node name="frogPlayer" parent="." instance=ExtResource("3_iu027")]
+z_index = 1
 
 [node name="Camera2D" type="Camera2D" parent="frogPlayer"]
 zoom = Vector2(0.8, 0.8)
