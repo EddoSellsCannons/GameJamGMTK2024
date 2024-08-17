@@ -1,28 +1,29 @@
-[gd_scene load_steps=12 format=3 uid="uid://b0f506swgiyjh"]
+[gd_scene load_steps=12 format=3 uid="uid://bgagmx1exlntk"]
 
-[ext_resource type="Script" path="res://Scenes/s_animal.gd" id="1_3dypp"]
-[ext_resource type="Texture2D" uid="uid://bupek2na083ph" path="res://assets/animal sprites/rabbit.png" id="2_dijgd"]
-[ext_resource type="Texture2D" uid="uid://32extdvluool" path="res://Image & Music/orderNotif.png" id="3_krxpc"]
+[ext_resource type="Script" path="res://Scenes/l_animal.gd" id="1_pk6he"]
+[ext_resource type="Texture2D" uid="uid://3jc0qe4jcy42" path="res://assets/animal sprites/bear.png" id="2_mla0n"]
+[ext_resource type="Texture2D" uid="uid://32extdvluool" path="res://Image & Music/orderNotif.png" id="3_kww3n"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_gkwp3"]
-size = Vector2(28, 32)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_vhh03"]
+radius = 11.5
+height = 44.0
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_5cdn7"]
-atlas = ExtResource("2_dijgd")
-region = Rect2(0, 0, 32, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_d1gvo"]
+atlas = ExtResource("2_mla0n")
+region = Rect2(0, 0, 48, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_mpoef"]
-atlas = ExtResource("2_dijgd")
-region = Rect2(32, 0, 32, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_k8nw2"]
+atlas = ExtResource("2_mla0n")
+region = Rect2(48, 0, 48, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ask2r"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_5cdn7")
+"texture": SubResource("AtlasTexture_d1gvo")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_mpoef")
+"texture": SubResource("AtlasTexture_k8nw2")
 }],
 "loop": true,
 "name": &"default",
@@ -70,15 +71,15 @@ _data = {
 "enemyTooKDamage": SubResource("Animation_j0x5m")
 }
 
-[node name="S_animal" type="Area2D" groups=["enemy"]]
-script = ExtResource("1_3dypp")
-maxSpeed = 200.0
-maxSize = 120.0
+[node name="L_animal" type="Area2D" groups=["enemy"]]
+script = ExtResource("1_pk6he")
+maxSpeed = 400.0
+maxSize = 800.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(7.8092e-06, -1)
+position = Vector2(3, 2)
 rotation = 1.5708
-shape = SubResource("RectangleShape2D_gkwp3")
+shape = SubResource("CapsuleShape2D_vhh03")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 clip_children = 2
@@ -96,9 +97,9 @@ color = Color(0.588235, 0, 0.596078, 0)
 
 [node name="playerNoticedNotif" type="Sprite2D" parent="."]
 texture_filter = 1
-position = Vector2(0, -22)
+position = Vector2(-0.499999, -18)
 scale = Vector2(0.90625, 0.8125)
-texture = ExtResource("3_krxpc")
+texture = ExtResource("3_kww3n")
 
 [node name="detectionRadius" type="Area2D" parent="."]
 collision_layer = 2

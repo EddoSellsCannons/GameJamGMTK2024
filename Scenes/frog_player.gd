@@ -1,11 +1,11 @@
 extends CharacterBody2D
 
 const STAMINA_CAP = 200.0
-const SHOOT_COST = 50.0
+const SHOOT_COST = 60.0
 
 var speed = 80.0
 var size = 100.0
-const sizeConsumeMultiplier = 0.05
+const sizeConsumeMultiplier = 0.1
 
 var dashMultiplier = 3
 
@@ -17,7 +17,7 @@ var isInvul: bool
 
 var moveDir
 
-var stamina =  STAMINA_CAP
+var stamina = STAMINA_CAP
 
 @onready var playerProj = preload("res://Scenes/player_proj.tscn")
 
@@ -82,7 +82,7 @@ func regenStamina():
 		stamina += 0.6
 
 func shootProj(dir):
-	if stamina > 0:
+	if stamina - SHOOT_COST > 0:
 		stamina -= SHOOT_COST
 		var proj = playerProj.instantiate()
 		proj.position = position

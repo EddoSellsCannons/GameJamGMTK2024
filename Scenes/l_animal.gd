@@ -59,7 +59,7 @@ func _on_area_2d_area_entered(area: Area2D) -> void: #Detection rad
 		player_detected_timer.start()
 
 func _on_speed_randomise_timer_timeout() -> void:
-	speed = rng.randf_range(maxSpeed-30, maxSpeed)
+	speed = rng.randf_range(maxSpeed/2, maxSpeed)
 	dir = Vector2(rng.randf_range(-1.0,1.0), rng.randf_range(-1.0,1.0))
 
 func _on_player_detected_timer_timeout() -> void:
@@ -73,7 +73,7 @@ func tookDamage():
 		isPoisoned = true
 		$AnimationPlayer.play("enemyTooKDamage")
 		for i in range(6):
-			size *= 0.95
+			size *= 0.98
 			scale = Vector2(size/100, size/100)
 			$tookDamageTimer.start()
 			await $tookDamageTimer.timeout
