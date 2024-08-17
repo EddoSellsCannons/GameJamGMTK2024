@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-var speed = 80.0
+var speed = 800.0
 var size = 100.0
 const sizeConsumeMultiplier = 0.05
 

@@ -9,6 +9,8 @@ var speed: float
 var dir = Vector2(0,0)
 var size
 
+@onready var gameManager = $".."
+
 func _ready() -> void:
 	size = rng.randf_range(maxSize/2, maxSize)
 	scale = Vector2(size/100, size/100)

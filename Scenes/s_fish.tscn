@@ -1,0 +1,102 @@
+[gd_scene load_steps=14 format=3 uid="uid://bt0kihkvc5oa6"]
+
+[ext_resource type="Script" path="res://Scenes/s_fish.gd" id="1_wkdwk"]
+[ext_resource type="Texture2D" uid="uid://dtupsdrvsjgio" path="res://assets/micro sprites/Micro Player.png" id="2_4sycn"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5a7lv"]
+size = Vector2(71.75, 30)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l3qjx"]
+atlas = ExtResource("2_4sycn")
+region = Rect2(0, 0, 32, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_otfj5"]
+atlas = ExtResource("2_4sycn")
+region = Rect2(0, 8, 32, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1rae5"]
+atlas = ExtResource("2_4sycn")
+region = Rect2(0, 24, 32, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_csta0"]
+atlas = ExtResource("2_4sycn")
+region = Rect2(32, 8, 32, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c5wuo"]
+atlas = ExtResource("2_4sycn")
+region = Rect2(32, 16, 32, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bxpql"]
+atlas = ExtResource("2_4sycn")
+region = Rect2(0, 16, 32, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2hahm"]
+atlas = ExtResource("2_4sycn")
+region = Rect2(32, 0, 32, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i6frp"]
+atlas = ExtResource("2_4sycn")
+region = Rect2(32, 24, 32, 8)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ask2r"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l3qjx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_otfj5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1rae5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_csta0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c5wuo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bxpql")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2hahm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i6frp")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_6bpl4"]
+radius = 167.012
+
+[node name="S_fish" type="Area2D" groups=["enemy"]]
+script = ExtResource("1_wkdwk")
+maxSpeed = 300.0
+maxSize = 200.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_5a7lv")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+position = Vector2(9.53674e-07, 4.76837e-07)
+scale = Vector2(2.25, 3.75)
+sprite_frames = SubResource("SpriteFrames_ask2r")
+autoplay = "default"
+frame_progress = 0.909706
+
+[node name="detectionRadius" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="detectionRadius"]
+shape = SubResource("CircleShape2D_6bpl4")
+
+[node name="speedRandomiseTimer" type="Timer" parent="."]
+wait_time = 3.0
+autostart = true
+
+[connection signal="area_entered" from="detectionRadius" to="." method="_on_area_2d_area_entered"]
+[connection signal="timeout" from="speedRandomiseTimer" to="." method="_on_speed_randomise_timer_timeout"]
