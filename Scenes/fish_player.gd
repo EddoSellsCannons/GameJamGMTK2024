@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-var speed = 80.0
+var speed = 800.0
 var size = 100.0
 const sizeConsumeMultiplier = 0.05
 
@@ -47,7 +47,7 @@ func tookDamage():
 	updateSizing()
 	anim_player.play("damageTaken")
 	isInvul = true
-	$playerMicrobe/invulTimer.start()
-	await $playerMicrobe/invulTimer.timeout
+	invulTimer.start()
+	await invulTimer.timeout
 	anim_player.play("RESET")
 	isInvul = false

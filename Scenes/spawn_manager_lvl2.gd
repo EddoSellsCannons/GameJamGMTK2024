@@ -1,6 +1,6 @@
 extends Node2D
 
-@onready var S_fish = preload("res://Scenes/s_microbe.tscn")
+@onready var S_fish = preload("res://Scenes/s_fish.tscn")
 @onready var M_fish = preload("res://Scenes/m_microbe.tscn")
 @onready var L_fish = preload("res://Scenes/l_microbe.tscn")
 
