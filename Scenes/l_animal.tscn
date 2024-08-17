@@ -74,7 +74,7 @@ _data = {
 [node name="L_animal" type="Area2D" groups=["enemy"]]
 script = ExtResource("1_pk6he")
 maxSpeed = 400.0
-maxSize = 800.0
+maxSize = 1200.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(3, 2)

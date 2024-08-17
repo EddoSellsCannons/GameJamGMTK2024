@@ -23,8 +23,8 @@ func update_chunks():
 	var chunk_y = int(player_position.y / (chunk_size * tile_size))
 	
 	# Generate and load chunks around the player (e.g., 3x3 chunks)
-	for x in range(chunk_x - 8, chunk_x + 8):
-		for y in range(chunk_y - 8, chunk_y + 8):
+	for x in range(chunk_x - 2, chunk_x + 2):
+		for y in range(chunk_y - 2, chunk_y + 2):
 			var chunk_coords = Vector2(x, y)
 			if not generated_chunks.has(chunk_coords):
 				generate_chunk(chunk_coords)
