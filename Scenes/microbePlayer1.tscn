@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://0tolyv5xhybl"]
+
+[ext_resource type="Script" path="res://Scenes/microbePlayer1.gd" id="1_mhinf"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_k4rto"]
+radius = 11.0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_yntig"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_dnmgp"]
+
+[node name="microbePlayer1" type="CharacterBody2D" groups=["Player"]]
+script = ExtResource("1_mhinf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_k4rto")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-5.48363e-06, 0.125008)
+scale = Vector2(0.0429688, 0.0424804)
+texture = SubResource("NoiseTexture2D_yntig")
+
+[node name="hurtbox" type="Area2D" parent="." groups=["Player"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hurtbox"]
+shape = SubResource("CircleShape2D_dnmgp")
+
+[connection signal="area_entered" from="hurtbox" to="." method="_on_hurtbox_area_entered"]
