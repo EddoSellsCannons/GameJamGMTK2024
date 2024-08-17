@@ -1,0 +1,44 @@
+[gd_scene load_steps=7 format=3 uid="uid://bnl883da0s7dg"]
+
+[ext_resource type="Script" path="res://Scenes/tree_proj.gd" id="1_fwtog"]
+[ext_resource type="Texture2D" uid="uid://dtupsdrvsjgio" path="res://assets/micro sprites/Micro Player.png" id="2_vg6wc"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0xi16"]
+atlas = ExtResource("2_vg6wc")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_et8g5"]
+atlas = ExtResource("2_vg6wc")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_28t2s"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0xi16")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_et8g5")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_g32ky"]
+radius = 15.0
+
+[node name="TreeProj" type="Area2D"]
+collision_layer = 0
+script = ExtResource("1_fwtog")
+projSpeed = 350.0
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_28t2s")
+autoplay = "default"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_g32ky")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

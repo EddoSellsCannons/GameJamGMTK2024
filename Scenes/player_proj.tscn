@@ -1,0 +1,41 @@
+[gd_scene load_steps=7 format=3 uid="uid://cr2qswn5kwmeu"]
+
+[ext_resource type="Texture2D" uid="uid://rwhc0vb8m372" path="res://assets/micro sprites/Micro enemy 2.png" id="1_4g5pt"]
+[ext_resource type="Script" path="res://Scenes/player_proj.gd" id="1_yiobk"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_mj61t"]
+radius = 14.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ohlnc"]
+atlas = ExtResource("1_4g5pt")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_olccr"]
+atlas = ExtResource("1_4g5pt")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_wgl4b"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ohlnc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_olccr")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="playerProj" type="Area2D"]
+script = ExtResource("1_yiobk")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_mj61t")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_wgl4b")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

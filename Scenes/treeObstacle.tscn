@@ -1,0 +1,63 @@
+[gd_scene load_steps=9 format=3 uid="uid://dqkha8tf211ny"]
+
+[ext_resource type="Script" path="res://Scenes/tree_obstacle.gd" id="1_7cph6"]
+[ext_resource type="Texture2D" uid="uid://bongsmq53xyrb" path="res://assets/fish sprites/fishPlayer.png" id="2_jrwcj"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_v8geh"]
+size = Vector2(110, 141)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fqsgt"]
+atlas = ExtResource("2_jrwcj")
+region = Rect2(0, 0, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xslel"]
+atlas = ExtResource("2_jrwcj")
+region = Rect2(64, 0, 64, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_hdvxq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fqsgt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xslel")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_40fn8"]
+radius = 395.011
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_caxm1"]
+size = Vector2(110, 141)
+
+[node name="TreeObstacle" type="StaticBody2D" groups=["obstacle"]]
+script = ExtResource("1_7cph6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-2, 70.5)
+shape = SubResource("RectangleShape2D_v8geh")
+
+[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+rotation = 1.5708
+scale = Vector2(5, 5)
+sprite_frames = SubResource("SpriteFrames_hdvxq")
+autoplay = "default"
+
+[node name="detectionRadius" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="detectionRadius"]
+shape = SubResource("CircleShape2D_40fn8")
+
+[node name="trampleZone" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="trampleZone"]
+position = Vector2(-2, 70.5)
+shape = SubResource("RectangleShape2D_caxm1")
+
+[connection signal="area_entered" from="detectionRadius" to="." method="_on_detection_radius_area_entered"]
+[connection signal="area_entered" from="trampleZone" to="." method="_on_trample_zone_area_entered"]

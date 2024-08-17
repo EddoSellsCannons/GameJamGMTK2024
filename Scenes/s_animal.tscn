@@ -1,0 +1,129 @@
+[gd_scene load_steps=12 format=3 uid="uid://b0f506swgiyjh"]
+
+[ext_resource type="Script" path="res://Scenes/s_animal.gd" id="1_3dypp"]
+[ext_resource type="Texture2D" uid="uid://dbhoyy12lj8y5" path="res://assets/fish sprites/fish1.png" id="2_p3g7d"]
+[ext_resource type="Texture2D" uid="uid://32extdvluool" path="res://Image & Music/orderNotif.png" id="3_krxpc"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_vhh03"]
+radius = 13.5
+height = 52.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6ll14"]
+atlas = ExtResource("2_p3g7d")
+region = Rect2(0, 0, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_djjei"]
+atlas = ExtResource("2_p3g7d")
+region = Rect2(64, 0, 64, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ask2r"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6ll14")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_djjei")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_6bpl4"]
+radius = 73.0
+
+[sub_resource type="Animation" id="Animation_j0x5m"]
+resource_name = "enemyTooKDamage"
+length = 0.2
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D/ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0.588235, 0, 0.596078, 0.784314), Color(0.161863, 0.400458, 0.174916, 0.784314)]
+}
+
+[sub_resource type="Animation" id="Animation_pfeft"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D/ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.588235, 0, 0.596078, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vdvym"]
+_data = {
+"RESET": SubResource("Animation_pfeft"),
+"enemyTooKDamage": SubResource("Animation_j0x5m")
+}
+
+[node name="S_animal" type="Area2D" groups=["enemy"]]
+script = ExtResource("1_3dypp")
+maxSpeed = 150.0
+maxSize = 600.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 0.5)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_vhh03")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+clip_children = 2
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_ask2r")
+autoplay = "default"
+frame_progress = 0.909706
+
+[node name="ColorRect" type="ColorRect" parent="AnimatedSprite2D"]
+offset_left = -37.0
+offset_top = -19.0
+offset_right = 38.0
+offset_bottom = 21.0
+color = Color(0.588235, 0, 0.596078, 0)
+
+[node name="playerNoticedNotif" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(-0.499999, -18)
+scale = Vector2(0.90625, 0.8125)
+texture = ExtResource("3_krxpc")
+
+[node name="detectionRadius" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="detectionRadius"]
+shape = SubResource("CircleShape2D_6bpl4")
+
+[node name="speedRandomiseTimer" type="Timer" parent="."]
+wait_time = 3.0
+autostart = true
+
+[node name="playerDetectedTimer" type="Timer" parent="."]
+wait_time = 3.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_vdvym")
+}
+
+[node name="tookDamageTimer" type="Timer" parent="."]
+wait_time = 0.5
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="area_entered" from="detectionRadius" to="." method="_on_area_2d_area_entered"]
+[connection signal="timeout" from="speedRandomiseTimer" to="." method="_on_speed_randomise_timer_timeout"]
+[connection signal="timeout" from="playerDetectedTimer" to="." method="_on_player_detected_timer_timeout"]
