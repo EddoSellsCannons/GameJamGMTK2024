@@ -3,7 +3,7 @@ extends Area2D
 @onready var speed_randomise_timer: Timer = $speedRandomiseTimer
 @onready var player_detected_timer: Timer = $playerDetectedTimer
 
-@onready var player_noticed_notif: Sprite2D = $AnimatedSprite2D/playerNoticedNotif
+@onready var player_noticed_notif: Sprite2D = $playerNoticedNotif
 
 
 var rng = RandomNumberGenerator.new()
@@ -16,6 +16,8 @@ var size
 var playerDetected:bool = false
 
 @onready var gameManager = $".."
+
+var isPoisoned = false
 
 func _ready() -> void:
 	size = rng.randf_range(maxSize/2, maxSize)
@@ -63,3 +65,17 @@ func _on_speed_randomise_timer_timeout() -> void:
 func _on_player_detected_timer_timeout() -> void:
 	playerDetected = false
 	player_noticed_notif.visible = false
+
+func tookDamage():
+	if isPoisoned:
+		return
+	if size > 80:
+		isPoisoned = true
+		$AnimationPlayer.play("enemyTooKDamage")
+		for i in range(6):
+			size *= 0.98
+			scale = Vector2(size/100, size/100)
+			$tookDamageTimer.start()
+			await $tookDamageTimer.timeout
+		$AnimationPlayer.play("RESET")
+		isPoisoned = false

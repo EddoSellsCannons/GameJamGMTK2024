@@ -1,0 +1,96 @@
+[gd_scene load_steps=9 format=3 uid="uid://dqkha8tf211ny"]
+
+[ext_resource type="Script" path="res://Scenes/tree_obstacle.gd" id="1_7cph6"]
+[ext_resource type="Texture2D" uid="uid://dp0iww5okpni1" path="res://assets/animal sprites/monkey_tree.png" id="2_db45s"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_v8geh"]
+size = Vector2(149, 159)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_40fn8"]
+radius = 395.011
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_caxm1"]
+size = Vector2(150, 160)
+
+[sub_resource type="Animation" id="Animation_33lb7"]
+resource_name = "throwProjectile"
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 0]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.8),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"launchProj"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_bbr5u"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_f0n1q"]
+_data = {
+"RESET": SubResource("Animation_bbr5u"),
+"throwProjectile": SubResource("Animation_33lb7")
+}
+
+[node name="TreeObstacle" type="StaticBody2D" groups=["obstacle"]]
+script = ExtResource("1_7cph6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1.5, 79.5)
+shape = SubResource("RectangleShape2D_v8geh")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+scale = Vector2(5, 5)
+texture = ExtResource("2_db45s")
+hframes = 5
+
+[node name="detectionRadius" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="detectionRadius"]
+shape = SubResource("CircleShape2D_40fn8")
+
+[node name="trampleZone" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="trampleZone"]
+position = Vector2(1, 80)
+shape = SubResource("RectangleShape2D_caxm1")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_f0n1q")
+}
+
+[connection signal="area_entered" from="detectionRadius" to="." method="_on_detection_radius_area_entered"]
+[connection signal="area_entered" from="trampleZone" to="." method="_on_trample_zone_area_entered"]

@@ -1,37 +1,35 @@
-[gd_scene load_steps=12 format=3 uid="uid://dljymjoh1xf2f"]
+[gd_scene load_steps=12 format=3 uid="uid://dptep1rhdosqc"]
 
-[ext_resource type="Script" path="res://Scenes/fish_player.gd" id="1_4lwqw"]
-[ext_resource type="Texture2D" uid="uid://bongsmq53xyrb" path="res://assets/fish sprites/fishPlayer.png" id="2_vbqvt"]
+[ext_resource type="Script" path="res://Scenes/frog_player.gd" id="1_ka7du"]
+[ext_resource type="Texture2D" uid="uid://cdwjvdbja5mig" path="res://assets/animal sprites/frog.png" id="2_arj7h"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_havpi"]
-radius = 10.9992
-height = 60.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_c2ssf"]
+size = Vector2(22, 30)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_5v14x"]
-atlas = ExtResource("2_vbqvt")
-region = Rect2(0, 0, 64, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_iwa7e"]
+atlas = ExtResource("2_arj7h")
+region = Rect2(0, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_mlm0p"]
-atlas = ExtResource("2_vbqvt")
-region = Rect2(64, 0, 64, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_dek0j"]
+atlas = ExtResource("2_arj7h")
+region = Rect2(32, 0, 32, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_td4jv"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_5v14x")
+"texture": SubResource("AtlasTexture_iwa7e")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_mlm0p")
+"texture": SubResource("AtlasTexture_dek0j")
 }],
 "loop": true,
 "name": &"default",
 "speed": 5.0
 }]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_yey22"]
-radius = 9.9961
-height = 59.9766
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1r6ue"]
+size = Vector2(22, 30)
 
 [sub_resource type="Animation" id="Animation_7j6ut"]
 length = 0.001
@@ -124,12 +122,14 @@ _data = {
 "eatSomething": SubResource("Animation_vk8iw")
 }
 
-[node name="fishPlayer" type="CharacterBody2D" groups=["Player"]]
-script = ExtResource("1_4lwqw")
+[node name="frogPlayer" type="CharacterBody2D" groups=["Player"]]
+collision_layer = 5
+script = ExtResource("1_ka7du")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1.086e-05, 3)
 rotation = 1.5708
-shape = SubResource("CapsuleShape2D_havpi")
+shape = SubResource("RectangleShape2D_c2ssf")
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="."]
 clip_children = 2
@@ -138,10 +138,10 @@ sprite_frames = SubResource("SpriteFrames_td4jv")
 autoplay = "default"
 
 [node name="ColorRect" type="ColorRect" parent="Sprite2D"]
-offset_left = -40.0
-offset_top = -57.0
-offset_right = 39.0
-offset_bottom = -17.0
+offset_left = -38.0
+offset_top = -19.0
+offset_right = 41.0
+offset_bottom = 21.0
 color = Color(1, 0, 0, 0)
 
 [node name="hurtbox" type="Area2D" parent="." groups=["Player"]]
@@ -149,9 +149,9 @@ collision_layer = 3
 collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hurtbox"]
-position = Vector2(1, 0)
+position = Vector2(-2.14577e-06, 2.99999)
 rotation = 1.5708
-shape = SubResource("CapsuleShape2D_yey22")
+shape = SubResource("RectangleShape2D_1r6ue")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
