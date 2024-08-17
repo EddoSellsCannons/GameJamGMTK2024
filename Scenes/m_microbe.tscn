@@ -1,15 +1,13 @@
-[gd_scene load_steps=4 format=3 uid="uid://coji0kgrrb3hr"]
+[gd_scene load_steps=4 format=3 uid="uid://jpbfgvqg2dlq"]
 
-[ext_resource type="Script" path="res://Scenes/s_microbe.gd" id="1_rf67w"]
+[ext_resource type="Script" path="res://Scenes/m_microbe.gd" id="1_0sgo8"]
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_6hfmv"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_uew53"]
 
-[node name="S_Microbe" type="Area2D" groups=["enemy"]]
-script = ExtResource("1_rf67w")
-maxSpeed = 200.0
-maxSize = 80.0
+[node name="M_Microbe" type="Area2D" groups=["enemy"]]
+script = ExtResource("1_0sgo8")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(1.99998, 1.00002)
