@@ -9,3 +9,4 @@ func next_level():
 func _process(delta: float) -> void:
 	if player.size >= 1200:
 		next_level()
+	$CanvasLayer/TextureProgressBar.value = player.stamina

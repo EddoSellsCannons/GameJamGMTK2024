@@ -41,4 +41,15 @@ position = Vector2(0, 800)
 [node name="leftSpawn" type="Marker2D" parent="fishPlayer/Camera2D" groups=["spawnpoint"]]
 position = Vector2(-1000, 0)
 
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="CanvasLayer"]
+offset_left = -1.0
+offset_top = 566.0
+offset_right = 301.0
+offset_bottom = 646.0
+value = 50.0
+nine_patch_stretch = true
+texture_progress = ExtResource("1_qvep0")
+
 [connection signal="timeout" from="spawnManager/spawnTimer" to="spawnManager" method="_on_spawn_timer_timeout"]

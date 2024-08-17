@@ -1,27 +1,27 @@
-[gd_scene load_steps=8 format=3 uid="uid://bt0kihkvc5oa6"]
+[gd_scene load_steps=8 format=3 uid="uid://b2tfrr4lsijqy"]
 
-[ext_resource type="Script" path="res://Scenes/s_fish.gd" id="1_wkdwk"]
-[ext_resource type="Texture2D" uid="uid://dbhoyy12lj8y5" path="res://assets/fish sprites/fish1.png" id="2_ny2du"]
+[ext_resource type="Script" path="res://Scenes/l_fish.gd" id="1_fm1eq"]
+[ext_resource type="Texture2D" uid="uid://bf5h4m8bg363k" path="res://assets/fish sprites/fish3.png" id="2_hh5bx"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5a7lv"]
-size = Vector2(40, 23)
+size = Vector2(53, 30)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_6ll14"]
-atlas = ExtResource("2_ny2du")
+[sub_resource type="AtlasTexture" id="AtlasTexture_443au"]
+atlas = ExtResource("2_hh5bx")
 region = Rect2(0, 0, 64, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_djjei"]
-atlas = ExtResource("2_ny2du")
+[sub_resource type="AtlasTexture" id="AtlasTexture_ylqov"]
+atlas = ExtResource("2_hh5bx")
 region = Rect2(64, 0, 64, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ask2r"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_6ll14")
+"texture": SubResource("AtlasTexture_443au")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_djjei")
+"texture": SubResource("AtlasTexture_ylqov")
 }],
 "loop": true,
 "name": &"default",
@@ -29,15 +29,15 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_6bpl4"]
-radius = 73.0
+radius = 41.0
 
-[node name="S_fish" type="Area2D" groups=["enemy"]]
-script = ExtResource("1_wkdwk")
-maxSpeed = 150.0
-maxSize = 80.0
+[node name="L_fish" type="Area2D" groups=["enemy"]]
+script = ExtResource("1_fm1eq")
+maxSpeed = 250.0
+maxSize = 500.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 0.5)
+position = Vector2(1.5, 0)
 shape = SubResource("RectangleShape2D_5a7lv")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -45,7 +45,7 @@ texture_filter = 1
 position = Vector2(0.499999, 4.76837e-07)
 sprite_frames = SubResource("SpriteFrames_ask2r")
 autoplay = "default"
-frame_progress = 0.909706
+frame_progress = 0.0529479
 
 [node name="detectionRadius" type="Area2D" parent="."]
 collision_layer = 2

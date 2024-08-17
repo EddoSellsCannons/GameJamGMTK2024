@@ -1,27 +1,27 @@
-[gd_scene load_steps=8 format=3 uid="uid://bt0kihkvc5oa6"]
+[gd_scene load_steps=8 format=3 uid="uid://cyjbd7rjt0flx"]
 
-[ext_resource type="Script" path="res://Scenes/s_fish.gd" id="1_wkdwk"]
-[ext_resource type="Texture2D" uid="uid://dbhoyy12lj8y5" path="res://assets/fish sprites/fish1.png" id="2_ny2du"]
+[ext_resource type="Script" path="res://Scenes/m_fish.gd" id="1_p10um"]
+[ext_resource type="Texture2D" uid="uid://caibofkjj8lfe" path="res://assets/fish sprites/fish2.png" id="2_7b3ya"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5a7lv"]
-size = Vector2(40, 23)
+size = Vector2(48, 30)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_6ll14"]
-atlas = ExtResource("2_ny2du")
+[sub_resource type="AtlasTexture" id="AtlasTexture_3vur5"]
+atlas = ExtResource("2_7b3ya")
 region = Rect2(0, 0, 64, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_djjei"]
-atlas = ExtResource("2_ny2du")
+[sub_resource type="AtlasTexture" id="AtlasTexture_4w7hi"]
+atlas = ExtResource("2_7b3ya")
 region = Rect2(64, 0, 64, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ask2r"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_6ll14")
+"texture": SubResource("AtlasTexture_3vur5")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_djjei")
+"texture": SubResource("AtlasTexture_4w7hi")
 }],
 "loop": true,
 "name": &"default",
@@ -29,15 +29,15 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_6bpl4"]
-radius = 73.0
+radius = 56.0357
 
-[node name="S_fish" type="Area2D" groups=["enemy"]]
-script = ExtResource("1_wkdwk")
+[node name="M_fish" type="Area2D" groups=["enemy"]]
+script = ExtResource("1_p10um")
 maxSpeed = 150.0
-maxSize = 80.0
+maxSize = 300.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 0.5)
+position = Vector2(-1, 0)
 shape = SubResource("RectangleShape2D_5a7lv")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

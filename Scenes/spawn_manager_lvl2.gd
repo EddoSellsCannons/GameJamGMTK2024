@@ -1,8 +1,10 @@
 extends Node2D
 
+var rng = RandomNumberGenerator.new()
+
 @onready var S_fish = preload("res://Scenes/s_fish.tscn")
-@onready var M_fish = preload("res://Scenes/m_microbe.tscn")
-@onready var L_fish = preload("res://Scenes/l_microbe.tscn")
+@onready var M_fish = preload("res://Scenes/m_fish.tscn")
+@onready var L_fish = preload("res://Scenes/l_fish.tscn")
 
 @onready var enemyList = [S_fish, M_fish, L_fish]
 
@@ -17,7 +19,15 @@ func _on_spawn_timer_timeout() -> void:
 	spawnEnemy()
 
 func spawnEnemy():
-	var enemyToAdd = enemyList.pick_random().instantiate()
+	var fishTypeToSpawn = rng.randi_range(0, 100)
+	var fishIndex
+	if fishTypeToSpawn >= 0 and fishTypeToSpawn <= 60:
+		fishIndex = 0
+	elif fishTypeToSpawn >= 61 and fishTypeToSpawn <= 90:
+		fishIndex = 1
+	elif fishTypeToSpawn >= 91 and fishTypeToSpawn <= 100:
+		fishIndex = 2
+	var enemyToAdd = enemyList[fishIndex].instantiate()
 	var posToSpawn = get_tree().get_nodes_in_group("spawnpoint").pick_random().position
 	enemyToAdd.position = posToSpawn
 	gameManager.add_child(enemyToAdd)
