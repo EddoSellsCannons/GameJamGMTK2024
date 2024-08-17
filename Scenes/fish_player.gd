@@ -17,6 +17,7 @@ var stamina = 100.0
 
 func _ready() -> void:
 	updateSizing()
+	speed = (size/80 * 100)
 
 func _physics_process(delta: float) -> void:
 	handleInput()

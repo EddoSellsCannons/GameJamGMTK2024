@@ -3,6 +3,9 @@ extends Area2D
 @onready var speed_randomise_timer: Timer = $speedRandomiseTimer
 @onready var player_detected_timer: Timer = $playerDetectedTimer
 
+@onready var player_noticed_notif: Sprite2D = $AnimatedSprite2D/playerNoticedNotif
+
+
 var rng = RandomNumberGenerator.new()
 @export var maxSpeed: float
 @export var maxSize: float
@@ -19,6 +22,7 @@ func _ready() -> void:
 	scale = Vector2(size/100, size/100)
 	playerDetected = false
 	speed = maxSpeed
+	player_noticed_notif.visible = false
 
 func _on_area_entered(area: Area2D) -> void:
 	if area.is_in_group("Player"):
@@ -29,8 +33,11 @@ func _process(delta: float) -> void:
 	if playerDetected:
 		if gameManager.player.size < size/80 * 100:
 			position += (gameManager.player.position - position).normalized() * maxSpeed * delta
-		else:
+		elif gameManager.player.size > size/80 * 100:
 			position -= (gameManager.player.position - position).normalized() * maxSpeed * delta
+		else:
+			position += dir * speed * delta
+		player_noticed_notif.visible = true
 	else:
 		position += dir * speed * delta
 	if dir.x > 0:
@@ -55,3 +62,4 @@ func _on_speed_randomise_timer_timeout() -> void:
 
 func _on_player_detected_timer_timeout() -> void:
 	playerDetected = false
+	player_noticed_notif.visible = false

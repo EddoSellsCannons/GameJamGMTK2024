@@ -138,10 +138,10 @@ sprite_frames = SubResource("SpriteFrames_td4jv")
 autoplay = "default"
 
 [node name="ColorRect" type="ColorRect" parent="Sprite2D"]
-offset_left = -40.0
-offset_top = -57.0
-offset_right = 39.0
-offset_bottom = -17.0
+offset_left = -38.0
+offset_top = -19.0
+offset_right = 41.0
+offset_bottom = 21.0
 color = Color(1, 0, 0, 0)
 
 [node name="hurtbox" type="Area2D" parent="." groups=["Player"]]

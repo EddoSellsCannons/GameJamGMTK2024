@@ -1,10 +1,12 @@
-[gd_scene load_steps=8 format=3 uid="uid://cyjbd7rjt0flx"]
+[gd_scene load_steps=9 format=3 uid="uid://cyjbd7rjt0flx"]
 
 [ext_resource type="Script" path="res://Scenes/m_fish.gd" id="1_p10um"]
 [ext_resource type="Texture2D" uid="uid://caibofkjj8lfe" path="res://assets/fish sprites/fish2.png" id="2_7b3ya"]
+[ext_resource type="Texture2D" uid="uid://32extdvluool" path="res://Image & Music/orderNotif.png" id="3_os1do"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_5a7lv"]
-size = Vector2(48, 30)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_tkiae"]
+radius = 11.0
+height = 50.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3vur5"]
 atlas = ExtResource("2_7b3ya")
@@ -38,7 +40,8 @@ maxSize = 300.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-1, 0)
-shape = SubResource("RectangleShape2D_5a7lv")
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_tkiae")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
@@ -46,6 +49,12 @@ position = Vector2(0.499999, 4.76837e-07)
 sprite_frames = SubResource("SpriteFrames_ask2r")
 autoplay = "default"
 frame_progress = 0.909706
+
+[node name="playerNoticedNotif" type="Sprite2D" parent="AnimatedSprite2D"]
+texture_filter = 1
+position = Vector2(-0.499999, -22)
+scale = Vector2(0.90625, 0.8125)
+texture = ExtResource("3_os1do")
 
 [node name="detectionRadius" type="Area2D" parent="."]
 collision_layer = 2
