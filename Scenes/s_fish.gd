@@ -21,15 +21,7 @@ func _on_area_entered(area: Area2D) -> void:
 			area.get_parent().tookDamage()
 	
 func _process(delta: float) -> void:
-	position += dir * speed * delta
-	if speed > 0:
-		speed -= 1
-	elif speed < 0:
-		speed += 1
-	
-func _on_speed_randomise_timer_timeout() -> void:
-	speed = rng.randf_range(maxSpeed/2, maxSpeed)
-	dir = Vector2(rng.randf_range(-1.0,1.0), rng.randf_range(-1.0,1.0))
+	pass
 
 func compareSize(playerSize):
 	if size > (playerSize/80 * 100):

@@ -1,10 +1,10 @@
 extends Node2D
 
-@onready var S_microbe = preload("res://Scenes/s_microbe.tscn")
-@onready var M_microbe = preload("res://Scenes/m_microbe.tscn")
-@onready var L_microbe = preload("res://Scenes/l_microbe.tscn")
+@onready var S_fish = preload("res://Scenes/s_microbe.tscn")
+@onready var M_fish = preload("res://Scenes/m_microbe.tscn")
+@onready var L_fish = preload("res://Scenes/l_microbe.tscn")
 
-@onready var enemyList = [S_microbe, M_microbe, L_microbe]
+@onready var enemyList = [S_fish, M_fish, L_fish]
 
 @onready var gameManager = $".."
 
