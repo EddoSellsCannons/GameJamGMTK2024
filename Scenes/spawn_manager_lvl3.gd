@@ -36,7 +36,7 @@ func spawnEnemy():
 	gameManager.add_child(enemyToAdd)
 
 func spawnObstacles():
-	for i in range(50):
+	for i in range(100):
 		var coords = Vector2(rng.randf_range(-5000, 5000), rng.randf_range(-5000, 5000))
 		var t = treeObstacle.instantiate()
 		t.position = coords

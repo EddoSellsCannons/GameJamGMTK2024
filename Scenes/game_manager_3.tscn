@@ -18,7 +18,7 @@ texture_region_size = Vector2i(32, 32)
 
 [sub_resource type="TileSet" id="TileSet_ie6es"]
 tile_size = Vector2i(32, 32)
-sources/3 = SubResource("TileSetAtlasSource_n3na8")
+sources/0 = SubResource("TileSetAtlasSource_n3na8")
 
 [node name="gameManager3" type="Node2D"]
 script = ExtResource("1_a23m5")
@@ -27,6 +27,8 @@ script = ExtResource("1_a23m5")
 tilemap = NodePath("../TileMap")
 
 [node name="TileMap" type="TileMap" parent="."]
+texture_filter = 1
+scale = Vector2(5, 5)
 tile_set = SubResource("TileSet_ie6es")
 format = 2
 

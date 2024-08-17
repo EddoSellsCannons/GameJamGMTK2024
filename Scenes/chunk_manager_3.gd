@@ -2,7 +2,7 @@ extends Node2D
 
 @export var tilemap: TileMap  # Reference to your TileMap node
 @export var chunk_size = 16  # Size of each chunk (in tiles)
-@export var tile_size = 32  # Size of each tile (in pixels)
+@export var tile_size = 16  # Size of each tile (in pixels)
 
 # Dictionary to keep track of generated chunks
 var generated_chunks = {}
