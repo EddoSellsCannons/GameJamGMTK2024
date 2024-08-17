@@ -46,7 +46,7 @@ _data = {
 [node name="TreeProj" type="Area2D"]
 collision_layer = 0
 script = ExtResource("1_fwtog")
-projSpeed = 350.0
+projSpeed = 500.0
 
 [node name="poopSprite" type="Sprite2D" parent="."]
 texture_filter = 1
