@@ -36,7 +36,7 @@ func _process(delta: float) -> void:
 		elif gameManager.player.size > size/80 * 100:
 			position -= (gameManager.player.position - position).normalized() * maxSpeed * delta
 		else:
-			playerDetected = false
+			position += dir * speed * delta
 		player_noticed_notif.visible = true
 	else:
 		position += dir * speed * delta
