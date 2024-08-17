@@ -73,7 +73,7 @@ func tookDamage():
 		isPoisoned = true
 		$AnimationPlayer.play("enemyTooKDamage")
 		for i in range(6):
-			size *= 0.98
+			size *= 0.95
 			scale = Vector2(size/100, size/100)
 			$tookDamageTimer.start()
 			await $tookDamageTimer.timeout
