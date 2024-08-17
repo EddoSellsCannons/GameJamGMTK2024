@@ -1,6 +1,6 @@
 extends Node2D
 
-@onready var player = $fishPlayer
+@onready var player = $frogPlayer
 @onready var spawnManager = $spawnManager
 
 func next_level():

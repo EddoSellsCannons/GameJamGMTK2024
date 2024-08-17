@@ -1,0 +1,85 @@
+[gd_scene load_steps=8 format=3 uid="uid://ts58moqxvisn"]
+
+[ext_resource type="Script" path="res://Scenes/game_manager_3.gd" id="1_a23m5"]
+[ext_resource type="Script" path="res://Scenes/spawn_manager_lvl3.gd" id="2_htlu3"]
+[ext_resource type="PackedScene" uid="uid://dptep1rhdosqc" path="res://Scenes/frogPlayer.tscn" id="3_iu027"]
+[ext_resource type="Script" path="res://Scenes/camera_2d.gd" id="4_1wmpi"]
+[ext_resource type="Texture2D" uid="uid://ig7pexd8fxwb" path="res://Image & Music/stamina.png" id="5_yxugy"]
+[ext_resource type="Texture2D" uid="uid://cllljjp6acmb2" path="res://Image & Music/test1.png" id="7_3vkyi"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_ikjl5"]
+
+[node name="gameManager3" type="Node2D"]
+script = ExtResource("1_a23m5")
+
+[node name="spawnManager" type="Node2D" parent="."]
+script = ExtResource("2_htlu3")
+
+[node name="spawnTimer" type="Timer" parent="spawnManager"]
+autostart = true
+
+[node name="frogPlayer" parent="." instance=ExtResource("3_iu027")]
+
+[node name="Camera2D" type="Camera2D" parent="frogPlayer"]
+zoom = Vector2(0.8, 0.8)
+limit_left = -5000
+limit_top = -5000
+limit_right = 5000
+limit_bottom = 5000
+limit_smoothed = true
+position_smoothing_enabled = true
+script = ExtResource("4_1wmpi")
+
+[node name="rightSpawn" type="Marker2D" parent="frogPlayer/Camera2D" groups=["spawnpoint"]]
+position = Vector2(1000, 0)
+
+[node name="topSpawn" type="Marker2D" parent="frogPlayer/Camera2D" groups=["spawnpoint"]]
+position = Vector2(0, -803)
+
+[node name="botSpawn" type="Marker2D" parent="frogPlayer/Camera2D" groups=["spawnpoint"]]
+position = Vector2(0, 800)
+
+[node name="leftSpawn" type="Marker2D" parent="frogPlayer/Camera2D" groups=["spawnpoint"]]
+position = Vector2(-1000, 0)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="CanvasLayer"]
+offset_left = -1.0
+offset_top = 566.0
+offset_right = 544.0
+offset_bottom = 646.0
+max_value = 300.0
+value = 50.0
+nine_patch_stretch = true
+texture_progress = ExtResource("5_yxugy")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+show_behind_parent = true
+texture_filter = 1
+offset_left = -5000.0
+offset_top = -5000.0
+offset_right = 5000.0
+offset_bottom = 5000.0
+texture = ExtResource("7_3vkyi")
+
+[node name="Area2D" type="StaticBody2D" parent="TextureRect"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TextureRect/Area2D"]
+position = Vector2(0, 10000)
+shape = SubResource("WorldBoundaryShape2D_ikjl5")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="TextureRect/Area2D"]
+position = Vector2(0, 10000)
+rotation = 1.5708
+shape = SubResource("WorldBoundaryShape2D_ikjl5")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="TextureRect/Area2D"]
+position = Vector2(10000, 0)
+rotation = 3.14159
+shape = SubResource("WorldBoundaryShape2D_ikjl5")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="TextureRect/Area2D"]
+position = Vector2(10000, 0)
+rotation = 4.71239
+shape = SubResource("WorldBoundaryShape2D_ikjl5")

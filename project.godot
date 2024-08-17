@@ -33,6 +33,7 @@ version_control/autoload_on_startup=true
 Player="Groups all players for detection"
 enemy="Detect enemies"
 spawnpoint="all spointpoint locations"
+obstacle="Obstacle group to change all to stompable"
 
 [input]
 
