@@ -1,11 +1,13 @@
-[gd_scene load_steps=5 format=3 uid="uid://3nnmsf3mlo36"]
+[gd_scene load_steps=6 format=3 uid="uid://3nnmsf3mlo36"]
 
+[ext_resource type="Script" path="res://Scenes/game_manager_2.gd" id="1_4upfv"]
 [ext_resource type="PackedScene" uid="uid://dljymjoh1xf2f" path="res://Scenes/fishPlayer.tscn" id="1_fdjib"]
 [ext_resource type="Texture2D" uid="uid://ddewjo0mpcvj0" path="res://Image & Music/tempBKG.png" id="1_qvep0"]
 [ext_resource type="Script" path="res://Scenes/spawn_manager_lvl2.gd" id="2_g8uxs"]
 [ext_resource type="Script" path="res://Scenes/camera_2d.gd" id="4_dg6wg"]
 
 [node name="gameManager2" type="Node2D"]
+script = ExtResource("1_4upfv")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 texture_filter = 1

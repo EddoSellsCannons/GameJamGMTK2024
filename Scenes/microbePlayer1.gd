@@ -47,7 +47,7 @@ func tookDamage():
 	updateSizing()
 	anim_player.play("damageTaken")
 	isInvul = true
-	$playerMicrobe/invulTimer.start()
-	await $playerMicrobe/invulTimer.timeout
+	invulTimer.start()
+	await invulTimer.timeout
 	anim_player.play("RESET")
 	isInvul = false
