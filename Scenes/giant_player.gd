@@ -1,23 +1,28 @@
 extends CharacterBody2D
 
-var speed = 80.0
-var size = 100.0
-const sizeConsumeMultiplier = 0.05
+const STAMINA_CAP = 200.0
+const SHOOT_COST = 60.0
+
+var speed = 100.0
+var size = 300.0
+const sizeConsumeMultiplier = 1
 
 var dashMultiplier = 3
 
 @onready var anim_player = $AnimationPlayer
 @onready var invulTimer = $invulTimer
+@onready var gameManager = $".."
 
 var isInvul: bool
 
 var moveDir
 
-var stamina = 100.0
+var stamina = STAMINA_CAP
+
+@onready var playerProj = preload("res://Scenes/player_proj.tscn")
 
 func _ready() -> void:
 	updateSizing()
-	speed = size * 0.8
 
 func _physics_process(delta: float) -> void:
 	handleInput()
@@ -37,8 +42,8 @@ func handleInput():
 func _on_hurtbox_area_entered(area: Area2D) -> void:
 	if area.is_in_group("enemy"):
 		if sizeCompare(area.size):
-			size += area.size * sizeConsumeMultiplier
-			speed = size * 0.8 #80% of size
+			size += area.maxSize * sizeConsumeMultiplier
+			speed = (size * 0.8) #80% of size
 			area.queue_free()
 			updateSizing()
 			anim_player.play("eatSomething")
@@ -73,5 +78,19 @@ func dash():
 		stamina -= 1
 		
 func regenStamina():
-	if stamina <= 100:
-		stamina += 0.2
+	if stamina <= STAMINA_CAP:
+		stamina += 0.6
+
+func shootProj(dir):
+	if stamina - SHOOT_COST > 0:
+		stamina -= SHOOT_COST
+		var proj = playerProj.instantiate()
+		proj.position = position
+		proj.dir = dir
+		gameManager.add_child(proj)
+
+func _input(event: InputEvent) -> void:
+	if event is InputEventMouseButton and event.pressed:
+		var mouse_position = get_global_mouse_position()
+		var projDir = (mouse_position - global_position).normalized()
+		shootProj(projDir)

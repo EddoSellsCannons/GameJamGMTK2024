@@ -23,7 +23,7 @@ var stamina = STAMINA_CAP
 
 func _ready() -> void:
 	updateSizing()
-	speed = (size/80 * 100)
+	speed = (size * 0.8)
 
 func _physics_process(delta: float) -> void:
 	handleInput()
@@ -44,19 +44,20 @@ func _on_hurtbox_area_entered(area: Area2D) -> void:
 	if area.is_in_group("enemy"):
 		if sizeCompare(area.size):
 			size += area.maxSize * sizeConsumeMultiplier
-			speed = (size/80 * 100) #80% of size
+			speed = (size * 0.8) #80% of size
 			area.queue_free()
 			updateSizing()
 			anim_player.play("eatSomething")
 
 func sizeCompare(enemySize):
-	if size > (enemySize/80 * 100):
+	if size > (enemySize * 0.8):
 		return true
 	else:
 		return false
 
 func updateSizing():
 	scale = Vector2(size/100, size/100)
+	speed = (size * 0.8)
 	#$Camera2D.zoom = Vector2(1 - size/1000, 1 - size/1000)
 
 func tookDamage():
