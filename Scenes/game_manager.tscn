@@ -175,7 +175,7 @@ theme_override_constants/outline_size = 8
 theme_override_fonts/normal_font = ExtResource("8_e0k6r")
 theme_override_font_sizes/normal_font_size = 32
 text = "
-Hmm, what to eat? I guess anything is eatable as long as it's smaller than me. 
+Hmm, what to eat? I guess anything is edible as long as it's smaller than me. 
 
 
 Time to get moving (WASD).

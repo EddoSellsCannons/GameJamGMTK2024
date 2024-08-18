@@ -1,5 +1,10 @@
 extends Node2D
 
+func _ready() -> void:
+	$microbe.visible = true
+	$water.visible = true
+	$forest.visible = true
+
 func _on_start_button_button_down() -> void:
 	$microbe/AnimationPlayer.play("levelTransition")
 
