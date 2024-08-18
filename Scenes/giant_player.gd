@@ -1,11 +1,11 @@
 extends CharacterBody2D
 
-const STAMINA_CAP = 200.0
-const SHOOT_COST = 60.0
+const STAMINA_CAP = 300.0
+const SHOOT_COST = 20.0
 
 var speed = 100.0
-var size = 300.0
-const sizeConsumeMultiplier = 1
+var size = 600.0
+const sizeConsumeMultiplier = 0.5
 
 var dashMultiplier = 3
 
@@ -19,7 +19,7 @@ var moveDir
 
 var stamina = STAMINA_CAP
 
-@onready var playerProj = preload("res://Scenes/player_proj.tscn")
+@onready var playerProj = preload("res://Scenes/player_proj2.tscn")
 
 func _ready() -> void:
 	updateSizing()
@@ -43,13 +43,14 @@ func _on_hurtbox_area_entered(area: Area2D) -> void:
 	if area.is_in_group("enemy"):
 		if sizeCompare(area.size):
 			size += area.maxSize * sizeConsumeMultiplier
-			speed = (size * 0.8) #80% of size
+			speed = (size * 0.6) #80% of size
 			area.queue_free()
 			updateSizing()
 			anim_player.play("eatSomething")
+			gameManager.all_sfx.playEatSound()
 
 func sizeCompare(enemySize):
-	if size > (enemySize * 0.8):
+	if size  * 0.8> (enemySize):
 		return true
 	else:
 		return false
@@ -62,10 +63,11 @@ func updateSizing():
 func tookDamage():
 	if isInvul:
 		return
-	if size > 100:
+	if size > 300:
 		size *= 0.9
 	updateSizing()
 	anim_player.play("damageTaken")
+	gameManager.all_sfx.playHurtSound()
 	isInvul = true
 	invulTimer.start()
 	await invulTimer.timeout
@@ -75,11 +77,11 @@ func tookDamage():
 func dash():
 	if stamina > 0:
 		velocity += moveDir * speed * dashMultiplier
-		stamina -= 1
+		stamina -= 1.5
 		
 func regenStamina():
 	if stamina <= STAMINA_CAP:
-		stamina += 0.6
+		stamina += 1
 
 func shootProj(dir):
 	if stamina - SHOOT_COST > 0:
@@ -87,7 +89,9 @@ func shootProj(dir):
 		var proj = playerProj.instantiate()
 		proj.position = position
 		proj.dir = dir
+		proj.size = size
 		gameManager.add_child(proj)
+		gameManager.all_sfx.playShootLaserSound()
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.pressed:

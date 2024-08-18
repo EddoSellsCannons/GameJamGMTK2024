@@ -1,29 +1,28 @@
 [gd_scene load_steps=12 format=3 uid="uid://c1gavo2oe62q7"]
 
 [ext_resource type="Script" path="res://Scenes/l_city_defender.gd" id="1_4754e"]
-[ext_resource type="Texture2D" uid="uid://3jc0qe4jcy42" path="res://assets/animal sprites/bear.png" id="2_7skvw"]
+[ext_resource type="Texture2D" uid="uid://dmtq0ye6dwr6m" path="res://Image & Music/defender.png" id="2_i0snh"]
 [ext_resource type="Texture2D" uid="uid://32extdvluool" path="res://Image & Music/orderNotif.png" id="3_107a3"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_vhh03"]
-radius = 11.5
-height = 44.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1ubin"]
+size = Vector2(26, 23)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_d1gvo"]
-atlas = ExtResource("2_7skvw")
-region = Rect2(0, 0, 48, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_g63n2"]
+atlas = ExtResource("2_i0snh")
+region = Rect2(0, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_k8nw2"]
-atlas = ExtResource("2_7skvw")
-region = Rect2(48, 0, 48, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_h2s37"]
+atlas = ExtResource("2_i0snh")
+region = Rect2(32, 0, 32, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ask2r"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_d1gvo")
+"texture": SubResource("AtlasTexture_g63n2")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_k8nw2")
+"texture": SubResource("AtlasTexture_h2s37")
 }],
 "loop": true,
 "name": &"default",
@@ -31,7 +30,7 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_6bpl4"]
-radius = 70.0
+radius = 44.0
 
 [sub_resource type="Animation" id="Animation_pfeft"]
 length = 0.001
@@ -50,7 +49,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_j0x5m"]
 resource_name = "enemyTooKDamage"
-length = 0.2
+length = 0.1
 loop_mode = 2
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -59,10 +58,10 @@ tracks/0/path = NodePath("AnimatedSprite2D/ColorRect:color")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2),
+"times": PackedFloat32Array(0, 0.1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Color(0.588235, 0, 0.596078, 0.784314), Color(0.161863, 0.400458, 0.174916, 0.784314)]
+"values": [Color(1, 0, 0, 0.784314), Color(1, 1, 1, 0.784314)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_vdvym"]
@@ -73,20 +72,21 @@ _data = {
 
 [node name="L_cityDefender" type="Area2D" groups=["enemy"]]
 script = ExtResource("1_4754e")
-maxSpeed = 300.0
+maxSpeed = 600.0
 maxSize = 1500.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(3, 2)
+position = Vector2(-4.5, 2.99999)
 rotation = 1.5708
-shape = SubResource("CapsuleShape2D_vhh03")
+shape = SubResource("RectangleShape2D_1ubin")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 clip_children = 2
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_ask2r")
 autoplay = "default"
-frame_progress = 0.909706
+frame = 1
+frame_progress = 0.492074
 
 [node name="ColorRect" type="ColorRect" parent="AnimatedSprite2D"]
 offset_left = -37.0
@@ -109,11 +109,11 @@ collision_mask = 2
 shape = SubResource("CircleShape2D_6bpl4")
 
 [node name="speedRandomiseTimer" type="Timer" parent="."]
-wait_time = 3.0
+wait_time = 9.0
 autostart = true
 
 [node name="playerDetectedTimer" type="Timer" parent="."]
-wait_time = 3.0
+wait_time = 4.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -121,7 +121,7 @@ libraries = {
 }
 
 [node name="tookDamageTimer" type="Timer" parent="."]
-wait_time = 0.5
+wait_time = 0.1
 
 [node name="chargeTimer" type="Timer" parent="."]
 wait_time = 1.5

@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://bemlpgq823ak4"]
+[gd_scene load_steps=21 format=3 uid="uid://bemlpgq823ak4"]
 
 [ext_resource type="Script" path="res://Scenes/spawn_manager_lvl4.gd" id="1_7bcd7"]
 [ext_resource type="Script" path="res://Scenes/game_manager_4.gd" id="1_18wxc"]
@@ -7,6 +7,11 @@
 [ext_resource type="Script" path="res://Scenes/camera_2d.gd" id="4_o1pp6"]
 [ext_resource type="Texture2D" uid="uid://t1jrhdi2vg3p" path="res://Image & Music/city_road.png" id="4_xu0dv"]
 [ext_resource type="Texture2D" uid="uid://ig7pexd8fxwb" path="res://Image & Music/stamina.png" id="5_jdstr"]
+[ext_resource type="Texture2D" uid="uid://bnurm3uwu7vyq" path="res://Image & Music/scale.png" id="8_ia7qr"]
+[ext_resource type="FontFile" uid="uid://djbx7iebjxc87" path="res://Image & Music/PixelOperator8.ttf" id="9_57xif"]
+[ext_resource type="Texture2D" uid="uid://b2ssm8eg3qi8x" path="res://Image & Music/TextBoxTexture.png" id="10_iwrh4"]
+[ext_resource type="PackedScene" uid="uid://dgfnnljlldlg6" path="res://Scenes/all_sfx.tscn" id="11_l1is0"]
+[ext_resource type="AudioStream" uid="uid://bq1s5ylwb51dd" path="res://Image & Music/Music/24 - Final Area.ogg" id="12_obq6o"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_cnv6b"]
 texture = ExtResource("4_xu0dv")
@@ -70,6 +75,100 @@ terrain_set_0/terrain_0/name = "Terrain 0"
 terrain_set_0/terrain_0/color = Color(0.5, 0.34375, 0.25, 1)
 sources/0 = SubResource("TileSetAtlasSource_cnv6b")
 
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_1gtmy"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_4635g"]
+
+[sub_resource type="Animation" id="Animation_pw0wy"]
+resource_name = "levelTransition"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../giantPlayer/Camera2D:zoom")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0.5, 0.5), Vector2(0.08, 0.08)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("levelTransitionColor:color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("..")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"next_level"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_bdeu6"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../giantPlayer/Camera2D:zoom")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.5, 0.5)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("levelTransitionColor:color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_7wikr"]
+resource_name = "startLevel"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("levelTransitionColor:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_whygn"]
+_data = {
+"RESET": SubResource("Animation_bdeu6"),
+"levelTransition": SubResource("Animation_pw0wy"),
+"startLevel": SubResource("Animation_7wikr")
+}
+
 [node name="gameManager4" type="Node2D"]
 script = ExtResource("1_18wxc")
 
@@ -93,6 +192,10 @@ format = 2
 
 [node name="Camera2D" type="Camera2D" parent="giantPlayer"]
 zoom = Vector2(0.5, 0.5)
+limit_left = -10000
+limit_top = -10000
+limit_right = 10000
+limit_bottom = 10000
 limit_smoothed = true
 position_smoothing_enabled = true
 script = ExtResource("4_o1pp6")
@@ -109,16 +212,130 @@ position = Vector2(0, 800)
 [node name="leftSpawn" type="Marker2D" parent="giantPlayer/Camera2D" groups=["spawnpoint"]]
 position = Vector2(-1000, 0)
 
+[node name="worldBorder" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="worldBorder"]
+position = Vector2(10000, 10000)
+shape = SubResource("WorldBoundaryShape2D_1gtmy")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="worldBorder"]
+position = Vector2(10000, -10000)
+rotation = 4.71239
+shape = SubResource("WorldBoundaryShape2D_4635g")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="worldBorder"]
+position = Vector2(-10000, 10000)
+rotation = 1.5708
+shape = SubResource("WorldBoundaryShape2D_4635g")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="worldBorder"]
+position = Vector2(-10000, -10000)
+rotation = 3.14159
+shape = SubResource("WorldBoundaryShape2D_4635g")
+
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="popUp" type="NinePatchRect" parent="CanvasLayer"]
+process_mode = 3
+texture_filter = 1
+offset_left = 106.0
+offset_top = 47.0
+offset_right = 1091.0
+offset_bottom = 598.0
+texture = ExtResource("10_iwrh4")
+patch_margin_left = 34
+patch_margin_top = 34
+patch_margin_right = 34
+patch_margin_bottom = 34
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/popUp"]
+layout_mode = 0
+offset_left = 48.0
+offset_top = 45.0
+offset_right = 941.0
+offset_bottom = 434.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_fonts/normal_font = ExtResource("9_57xif")
+theme_override_font_sizes/normal_font_size = 32
+text = "Text two three four
+eight nine 
+six seven dog cat horse
+
+rodeo 
+
+eat "
+
+[node name="Button" type="Button" parent="CanvasLayer/popUp"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 388.0
+offset_top = 457.0
+offset_right = 609.0
+offset_bottom = 513.0
+theme_override_fonts/font = ExtResource("9_57xif")
+theme_override_font_sizes/font_size = 32
+text = "GO!"
 
 [node name="TextureProgressBar" type="TextureProgressBar" parent="CanvasLayer"]
 offset_left = -1.0
 offset_top = 566.0
 offset_right = 544.0
 offset_bottom = 646.0
-max_value = 200.0
-value = 50.0
+max_value = 300.0
 nine_patch_stretch = true
 texture_progress = ExtResource("5_jdstr")
 
+[node name="levelTransitionColor" type="ColorRect" parent="CanvasLayer"]
+offset_right = 1152.0
+offset_bottom = 648.0
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[node name="scale" type="TextureRect" parent="CanvasLayer"]
+texture_filter = 1
+offset_left = 1019.0
+offset_top = 533.0
+offset_right = 1146.0
+offset_bottom = 636.0
+texture = ExtResource("8_ia7qr")
+
+[node name="Label" type="Label" parent="CanvasLayer/scale"]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 64.0
+offset_right = 104.0
+offset_bottom = 112.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_fonts/font = ExtResource("9_57xif")
+theme_override_font_sizes/font_size = 40
+text = "km"
+
+[node name="Label2" type="Label" parent="CanvasLayer/scale"]
+layout_mode = 0
+offset_left = 23.0
+offset_top = 102.0
+offset_right = 104.0
+offset_bottom = 110.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("9_57xif")
+theme_override_font_sizes/font_size = 8
+text = "*not to scale"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer"]
+process_mode = 3
+libraries = {
+"": SubResource("AnimationLibrary_whygn")
+}
+
+[node name="allSFX" parent="." instance=ExtResource("11_l1is0")]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("12_obq6o")
+volume_db = -10.0
+autoplay = true
+
 [connection signal="timeout" from="spawnManager4/spawnTimer" to="spawnManager4" method="_on_spawn_timer_timeout"]
+[connection signal="button_down" from="CanvasLayer/popUp/Button" to="." method="_on_button_button_down"]

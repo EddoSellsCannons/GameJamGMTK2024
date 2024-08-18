@@ -30,7 +30,7 @@ func _on_speed_randomise_timer_timeout() -> void:
 	dir = Vector2(rng.randf_range(-1.0,1.0), rng.randf_range(-1.0,1.0))
 
 func compareSize(playerSize):
-	if size > (playerSize * 0.8):
+	if size  * 0.8 > (playerSize):
 		return true
 	else:
 		return false

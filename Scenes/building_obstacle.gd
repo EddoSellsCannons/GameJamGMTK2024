@@ -1,6 +1,6 @@
 extends StaticBody2D
 
-var proj = preload("res://Scenes/TreeProj.tscn")
+var proj = preload("res://Scenes/buildingProj.tscn")
 
 @onready var gameManager = $".."
 
@@ -31,5 +31,6 @@ func _process(delta: float) -> void:
 
 func _on_trample_zone_area_entered(area: Area2D) -> void:
 	if area.is_in_group("Player"):
-		if area.get_parent().size >= 500:
+		if area.get_parent().size >= 800:
+			gameManager.all_sfx.playShootPoisonSound()
 			queue_free()

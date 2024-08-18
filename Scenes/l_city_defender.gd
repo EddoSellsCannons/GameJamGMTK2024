@@ -9,7 +9,7 @@ extends Area2D
 
 @onready var player_noticed_notif: Sprite2D = $playerNoticedNotif
 
-@onready var proj = preload("res://Scenes/TreeProj.tscn")
+@onready var proj = preload("res://Scenes/cityDefenderProj.tscn")
 
 var rng = RandomNumberGenerator.new()
 @export var maxSpeed: float
@@ -39,20 +39,24 @@ func _on_area_entered(area: Area2D) -> void:
 	
 func _process(delta: float) -> void:
 	if isCharging:
-		position += dir * maxSpeed * 8 * delta
+		position += dir * maxSpeed * randi_range(6, 10) * delta
 		return
 	if playerDetected:
 		player_noticed_notif.visible = true
 		charging_warning_timer.start()
 		playerDetected = false
 		dir = (gameManager.player.position - position).normalized()
+		$detectionRadius.set_collision_mask_value(2, false)
 		await charging_warning_timer.timeout
 		isCharging = true
 		charge_timer.start()
 		player_detected_timer.start()
 		player_noticed_notif.visible = false
 	else:
-		position += (gameManager.player.position - position).normalized() * maxSpeed * delta
+		if abs(gameManager.player.position - position) > Vector2(2000, 2000):
+			position += (gameManager.player.position - position).normalized() * maxSpeed * 4 * delta
+		else:
+			position += (gameManager.player.position - position).normalized() * maxSpeed * delta
 
 func compareSize(playerSize):
 	return true
@@ -63,22 +67,21 @@ func _on_area_2d_area_entered(area: Area2D) -> void: #Detection rad
 		player_detected_timer.start()
 
 func _on_speed_randomise_timer_timeout() -> void:
-	pass
-	#speed = rng.randf_range(maxSpeed/2, maxSpeed)
-	#dir = Vector2(rng.randf_range(-1.0,1.0), rng.randf_range(-1.0,1.0))
+	speed = rng.randf_range(maxSpeed/2, maxSpeed)
 
 func _on_player_detected_timer_timeout() -> void:
 	playerDetected = false
 	player_noticed_notif.visible = false
+	$detectionRadius.set_collision_mask_value(2, true)
 
 func tookDamage():
-	if isPoisoned:
-		return
+	#if isPoisoned:
+		#return
 	if size > 60:
 		isPoisoned = true
 		$AnimationPlayer.play("enemyTooKDamage")
-		for i in range(2):
-			size -= 100
+		for i in range(1):
+			size -= 5
 			$AnimatedSprite2D.scale = Vector2(size/maxSize, size/maxSize)
 			$CollisionShape2D.scale = Vector2(size/maxSize, size/maxSize)
 			$tookDamageTimer.start()
@@ -94,4 +97,5 @@ func _on_proj_timer_timeout() -> void:
 	projToSpawn.position = position
 	dir = (gameManager.player.position - position).normalized()
 	projToSpawn.dir = dir
+	projToSpawn.size = size
 	gameManager.add_child(projToSpawn)
