@@ -34,7 +34,7 @@ func handleInput():
 	velocity = moveDir * speed
 	if moveDir.x > 0:
 		$Sprite2D.flip_h = false
-	else:
+	elif moveDir.x < 0:
 		$Sprite2D.flip_h = true
 	if Input.is_action_pressed("ui_accept"):
 		dash()
@@ -44,6 +44,8 @@ func _on_hurtbox_area_entered(area: Area2D) -> void:
 		if sizeCompare(area.size):
 			size += area.maxSize * sizeConsumeMultiplier
 			speed = (size * 0.6) #80% of size
+			if area.is_in_group("boss"):
+				gameManager.bossCount -= 1
 			area.queue_free()
 			updateSizing()
 			anim_player.play("eatSomething")

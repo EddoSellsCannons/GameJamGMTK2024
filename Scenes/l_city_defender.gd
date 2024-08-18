@@ -6,7 +6,6 @@ extends Area2D
 @onready var charging_warning_timer: Timer = $chargingWarningTimer
 @onready var proj_timer: Timer = $projTimer
 
-
 @onready var player_noticed_notif: Sprite2D = $playerNoticedNotif
 
 @onready var proj = preload("res://Scenes/cityDefenderProj.tscn")
@@ -53,11 +52,15 @@ func _process(delta: float) -> void:
 		player_detected_timer.start()
 		player_noticed_notif.visible = false
 	else:
-		if abs(gameManager.player.position - position) > Vector2(2000, 2000):
+		if abs(gameManager.player.position - position) > Vector2(3000, 3000):
 			position += (gameManager.player.position - position).normalized() * maxSpeed * 4 * delta
 		else:
 			position += (gameManager.player.position - position).normalized() * maxSpeed * delta
-
+	if dir.x > 0:
+		$AnimatedSprite2D.flip_h = true
+	else:
+		$AnimatedSprite2D.flip_h = false
+	
 func compareSize(playerSize):
 	return true
 

@@ -20,9 +20,9 @@ func _on_spawn_timer_timeout() -> void:
 func spawnEnemy():
 	var enemyTypeToSpawn = rng.randi_range(0, 100)
 	var enemyIndex
-	if enemyTypeToSpawn >= 0 and enemyTypeToSpawn <= 70:
+	if enemyTypeToSpawn >= 0 and enemyTypeToSpawn <= 80:
 		enemyIndex = 0
-	elif enemyTypeToSpawn >= 71 and enemyTypeToSpawn <= 94:
+	elif enemyTypeToSpawn >= 81 and enemyTypeToSpawn <= 94:
 		enemyIndex = 1
 	elif enemyTypeToSpawn >= 95 and enemyTypeToSpawn <= 100:
 		enemyIndex = 2
