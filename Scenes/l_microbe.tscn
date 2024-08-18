@@ -31,7 +31,7 @@ radius = 13.0
 [node name="L_Microbe" type="Area2D" groups=["enemy"]]
 script = ExtResource("1_ytuyj")
 maxSpeed = 500.0
-maxSize = 500.0
+maxSize = 800.0
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1

@@ -36,7 +36,7 @@ radius = 41.0
 [node name="L_fish" type="Area2D" groups=["enemy"]]
 script = ExtResource("1_fm1eq")
 maxSpeed = 300.0
-maxSize = 700.0
+maxSize = 800.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 rotation = 1.5708

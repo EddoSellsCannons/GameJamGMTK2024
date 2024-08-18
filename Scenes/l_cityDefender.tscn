@@ -70,9 +70,9 @@ _data = {
 "enemyTooKDamage": SubResource("Animation_j0x5m")
 }
 
-[node name="L_cityDefender" type="Area2D" groups=["enemy"]]
+[node name="L_cityDefender" type="Area2D" groups=["boss", "enemy"]]
 script = ExtResource("1_4754e")
-maxSpeed = 600.0
+maxSpeed = 700.0
 maxSize = 1500.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

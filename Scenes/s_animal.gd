@@ -35,17 +35,21 @@ func _process(delta: float) -> void:
 	if playerDetected:
 		if gameManager.player.size < size * 0.8:
 			position += (gameManager.player.position - position).normalized() * maxSpeed * delta
+			dir = (gameManager.player.position - position).normalized()
+			player_noticed_notif.visible = true
 		elif gameManager.player.size * 0.8 > size:
 			position -= (gameManager.player.position - position).normalized() * maxSpeed * delta
+			dir = -(gameManager.player.position - position).normalized()
+			player_noticed_notif.visible = true
 		else:
 			playerDetected = false
-		player_noticed_notif.visible = true
+			player_noticed_notif.visible = false
 	else:
 		position += dir * speed * delta
 	if dir.x > 0:
-		$AnimatedSprite2D.flip_h = false
-	else:
 		$AnimatedSprite2D.flip_h = true
+	else:
+		$AnimatedSprite2D.flip_h = false
 
 func compareSize(playerSize):
 	if size * 0.8 > (playerSize):

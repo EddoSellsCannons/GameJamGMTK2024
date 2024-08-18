@@ -21,9 +21,9 @@ func _on_spawn_timer_timeout() -> void:
 func spawnEnemy():
 	var fishTypeToSpawn = rng.randi_range(0, 100)
 	var fishIndex
-	if fishTypeToSpawn >= 0 and fishTypeToSpawn <= 70:
+	if fishTypeToSpawn >= 0 and fishTypeToSpawn <= 80:
 		fishIndex = 0
-	elif fishTypeToSpawn >= 71 and fishTypeToSpawn <= 94:
+	elif fishTypeToSpawn >= 81 and fishTypeToSpawn <= 94:
 		fishIndex = 1
 	elif fishTypeToSpawn >= 95 and fishTypeToSpawn <= 100:
 		fishIndex = 2
