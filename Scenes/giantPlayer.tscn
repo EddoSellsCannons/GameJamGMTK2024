@@ -137,6 +137,8 @@ clip_children = 2
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_td4jv")
 autoplay = "default"
+frame = 1
+frame_progress = 0.849806
 
 [node name="ColorRect" type="ColorRect" parent="Sprite2D"]
 offset_left = -38.0
