@@ -1,0 +1,40 @@
+[gd_scene load_steps=6 format=3 uid="uid://bsrbmu2fhqysh"]
+
+[ext_resource type="Texture2D" uid="uid://dcch25py50g3e" path="res://Image & Music/nuclear.png" id="1_rylyb"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bpyv7"]
+atlas = ExtResource("1_rylyb")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lrd8x"]
+atlas = ExtResource("1_rylyb")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ak75d"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bpyv7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lrd8x")
+}],
+"loop": true,
+"name": &"default",
+"speed": 2.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_utx8j"]
+size = Vector2(48, 56)
+
+[node name="nuclear" type="Area2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_ak75d")
+autoplay = "default"
+frame_progress = 0.195385
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, 4)
+shape = SubResource("RectangleShape2D_utx8j")

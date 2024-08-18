@@ -17,7 +17,7 @@ func next_level():
 	get_tree().change_scene_to_file("res://Scenes/game_manager_4.tscn")
 
 func _process(delta: float) -> void:
-	if player.size >= 120:
+	if player.size >= 1200:
 		$CanvasLayer/AnimationPlayer.play("levelTransition")
 	$CanvasLayer/TextureProgressBar.value = player.stamina
 
