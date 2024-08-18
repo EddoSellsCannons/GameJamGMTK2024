@@ -1,0 +1,124 @@
+[gd_scene load_steps=10 format=3 uid="uid://bemlpgq823ak4"]
+
+[ext_resource type="Script" path="res://Scenes/spawn_manager_lvl4.gd" id="1_7bcd7"]
+[ext_resource type="Script" path="res://Scenes/game_manager_4.gd" id="1_18wxc"]
+[ext_resource type="PackedScene" uid="uid://chbb2i1ce7y2v" path="res://Scenes/chunk_manager4.tscn" id="2_2rrn3"]
+[ext_resource type="PackedScene" uid="uid://c8b4crkc12s3r" path="res://Scenes/giantPlayer.tscn" id="3_s54kt"]
+[ext_resource type="Script" path="res://Scenes/camera_2d.gd" id="4_o1pp6"]
+[ext_resource type="Texture2D" uid="uid://t1jrhdi2vg3p" path="res://Image & Music/city_road.png" id="4_xu0dv"]
+[ext_resource type="Texture2D" uid="uid://ig7pexd8fxwb" path="res://Image & Music/stamina.png" id="5_jdstr"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_cnv6b"]
+texture = ExtResource("4_xu0dv")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+0:0/0/terrain_set = 0
+0:0/0/terrain = 0
+0:0/0/terrains_peering_bit/right_side = 0
+0:0/0/terrains_peering_bit/bottom_side = 0
+0:0/0/terrains_peering_bit/left_side = 0
+0:0/0/terrains_peering_bit/top_side = 0
+1:0/0 = 0
+1:0/0/terrain_set = 0
+1:0/0/terrain = 0
+1:0/0/terrains_peering_bit/right_side = 0
+1:0/0/terrains_peering_bit/bottom_side = 0
+1:0/0/terrains_peering_bit/left_side = 0
+1:0/0/terrains_peering_bit/top_side = 0
+2:0/0 = 0
+2:0/0/terrain_set = 0
+2:0/0/terrain = 0
+2:0/0/terrains_peering_bit/right_side = 0
+2:0/0/terrains_peering_bit/left_side = 0
+0:1/0 = 0
+0:1/0/terrain_set = 0
+0:1/0/terrain = 0
+0:1/0/terrains_peering_bit/right_side = 0
+0:1/0/terrains_peering_bit/bottom_side = 0
+1:1/0 = 0
+1:1/0/terrain_set = 0
+1:1/0/terrain = 0
+1:1/0/terrains_peering_bit/left_side = 0
+1:1/0/terrains_peering_bit/top_side = 0
+2:1/0 = 0
+2:1/0/terrain_set = 0
+2:1/0/terrain = 0
+2:1/0/terrains_peering_bit/bottom_side = 0
+2:1/0/terrains_peering_bit/top_side = 0
+0:2/0 = 0
+0:2/0/terrain_set = 0
+0:2/0/terrain = 0
+0:2/0/terrains_peering_bit/left_side = 0
+0:2/0/terrains_peering_bit/top_side = 0
+1:2/0 = 0
+1:2/0/terrain_set = 0
+1:2/0/terrain = 0
+1:2/0/terrains_peering_bit/right_side = 0
+1:2/0/terrains_peering_bit/bottom_side = 0
+2:2/0 = 0
+2:2/0/terrain_set = 0
+2:2/0/terrain = 0
+2:2/0/terrains_peering_bit/right_side = 0
+2:2/0/terrains_peering_bit/bottom_side = 0
+2:2/0/terrains_peering_bit/left_side = 0
+2:2/0/terrains_peering_bit/top_side = 0
+
+[sub_resource type="TileSet" id="TileSet_7gmk2"]
+tile_size = Vector2i(32, 32)
+terrain_set_0/mode = 0
+terrain_set_0/terrain_0/name = "Terrain 0"
+terrain_set_0/terrain_0/color = Color(0.5, 0.34375, 0.25, 1)
+sources/0 = SubResource("TileSetAtlasSource_cnv6b")
+
+[node name="gameManager4" type="Node2D"]
+script = ExtResource("1_18wxc")
+
+[node name="spawnManager4" type="Node2D" parent="."]
+script = ExtResource("1_7bcd7")
+
+[node name="spawnTimer" type="Timer" parent="spawnManager4"]
+wait_time = 8.0
+autostart = true
+
+[node name="chunkManager4" parent="." node_paths=PackedStringArray("tilemap") instance=ExtResource("2_2rrn3")]
+tilemap = NodePath("../TileMap")
+tile_size = 32
+
+[node name="TileMap" type="TileMap" parent="."]
+texture_filter = 1
+tile_set = SubResource("TileSet_7gmk2")
+format = 2
+
+[node name="giantPlayer" parent="." instance=ExtResource("3_s54kt")]
+
+[node name="Camera2D" type="Camera2D" parent="giantPlayer"]
+zoom = Vector2(0.5, 0.5)
+limit_smoothed = true
+position_smoothing_enabled = true
+script = ExtResource("4_o1pp6")
+
+[node name="rightSpawn" type="Marker2D" parent="giantPlayer/Camera2D" groups=["spawnpoint"]]
+position = Vector2(1000, 0)
+
+[node name="topSpawn" type="Marker2D" parent="giantPlayer/Camera2D" groups=["spawnpoint"]]
+position = Vector2(0, -803)
+
+[node name="botSpawn" type="Marker2D" parent="giantPlayer/Camera2D" groups=["spawnpoint"]]
+position = Vector2(0, 800)
+
+[node name="leftSpawn" type="Marker2D" parent="giantPlayer/Camera2D" groups=["spawnpoint"]]
+position = Vector2(-1000, 0)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="CanvasLayer"]
+offset_left = -1.0
+offset_top = 566.0
+offset_right = 544.0
+offset_bottom = 646.0
+max_value = 200.0
+value = 50.0
+nine_patch_stretch = true
+texture_progress = ExtResource("5_jdstr")
+
+[connection signal="timeout" from="spawnManager4/spawnTimer" to="spawnManager4" method="_on_spawn_timer_timeout"]

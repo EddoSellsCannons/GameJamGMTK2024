@@ -20,6 +20,21 @@ texture_region_size = Vector2i(32, 32)
 tile_size = Vector2i(32, 32)
 sources/0 = SubResource("TileSetAtlasSource_n3na8")
 
+[sub_resource type="Animation" id="Animation_plnio"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.4, 0.290196, 0.133333, 0)]
+}
+
 [sub_resource type="Animation" id="Animation_fha4v"]
 resource_name = "takeDamagefromPoop"
 length = 0.5
@@ -35,21 +50,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(0.4, 0.290196, 0.133333, 0.784314), Color(0.4, 0.290196, 0.133333, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_plnio"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("ColorRect:color")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(0.4, 0.290196, 0.133333, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_l7f85"]

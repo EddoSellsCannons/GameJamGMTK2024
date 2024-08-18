@@ -1,13 +1,13 @@
-[gd_scene load_steps=9 format=3 uid="uid://dqkha8tf211ny"]
+[gd_scene load_steps=9 format=3 uid="uid://lb5v3vppdmxo"]
 
-[ext_resource type="Script" path="res://Scenes/tree_obstacle.gd" id="1_7cph6"]
-[ext_resource type="Texture2D" uid="uid://dp0iww5okpni1" path="res://assets/animal sprites/monkey_tree.png" id="2_db45s"]
+[ext_resource type="Script" path="res://Scenes/building_obstacle.gd" id="1_a3a5e"]
+[ext_resource type="Texture2D" uid="uid://dp0iww5okpni1" path="res://assets/animal sprites/monkey_tree.png" id="2_f3xvj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v8geh"]
 size = Vector2(149, 159)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_40fn8"]
-radius = 450.04
+radius = 820.049
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_caxm1"]
 size = Vector2(150, 160)
@@ -63,9 +63,9 @@ _data = {
 "throwProjectile": SubResource("Animation_33lb7")
 }
 
-[node name="TreeObstacle" type="StaticBody2D" groups=["obstacle"]]
+[node name="BuildingObstacle" type="StaticBody2D" groups=["obstacle"]]
 y_sort_enabled = true
-script = ExtResource("1_7cph6")
+script = ExtResource("1_a3a5e")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(1.5, 79.5)
@@ -74,7 +74,7 @@ shape = SubResource("RectangleShape2D_v8geh")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
 scale = Vector2(5, 5)
-texture = ExtResource("2_db45s")
+texture = ExtResource("2_f3xvj")
 hframes = 5
 
 [node name="detectionRadius" type="Area2D" parent="."]
