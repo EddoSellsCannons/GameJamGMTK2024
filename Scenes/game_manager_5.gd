@@ -2,6 +2,7 @@ extends Node2D
 
 @onready var anim_player = $AnimationPlayer
 @onready var all_sfx: Node = $allSFX
+@onready var cutscene_player: CharacterBody2D = $"Cutscene player"
 
 
 func _ready() -> void:
@@ -15,3 +16,7 @@ func next_level():
 func _on_button_button_down() -> void:
 	$CanvasLayer/popUp.visible = false
 	get_tree().paused = false
+
+func _on_nuclear_area_entered(area: Area2D) -> void:
+	anim_player.play("beginFinalCutscene")
+	cutscene_player.cut_controls()

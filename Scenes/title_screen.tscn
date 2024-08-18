@@ -36,34 +36,6 @@ texture = ExtResource("2_dxxsr")
 [sub_resource type="TileSet" id="TileSet_mdmeh"]
 sources/0 = SubResource("TileSetAtlasSource_g07tv")
 
-[sub_resource type="Animation" id="Animation_glgj4"]
-resource_name = "titleSizingAnim"
-loop_mode = 2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("microbe/Label:theme_override_font_sizes/font_size")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [80, 16]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("microbe/Label3:theme_override_font_sizes/font_size")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [80, 128]
-}
-
 [sub_resource type="Animation" id="Animation_irtbc"]
 length = 0.001
 tracks/0/type = "value"
@@ -131,6 +103,34 @@ tracks/1/keys = {
 "args": [],
 "method": &"start_game"
 }]
+}
+
+[sub_resource type="Animation" id="Animation_glgj4"]
+resource_name = "titleSizingAnim"
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("microbe/Label:theme_override_font_sizes/font_size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [80, 16]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("microbe/Label3:theme_override_font_sizes/font_size")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [80, 128]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_6swy5"]
@@ -471,6 +471,33 @@ texture = ExtResource("19_3gnsa")
 expand_margin_top = 5.0
 expand_margin_bottom = 5.0
 
+[sub_resource type="Animation" id="Animation_fuxge"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureRect3:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(116, 29)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("TextureRect3:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
 [sub_resource type="Animation" id="Animation_5hqb7"]
 resource_name = "arrowSlider"
 length = 3.0
@@ -501,33 +528,6 @@ tracks/1/keys = {
 "values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_fuxge"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("TextureRect3:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(116, 29)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("TextureRect3:modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_mldyw"]
 _data = {
 "RESET": SubResource("Animation_fuxge"),
@@ -548,9 +548,11 @@ layer_0/tile_data = PackedInt32Array(131073, 65536, 1, 196610, 0, 0, 196613, 655
 
 [node name="startButton" type="Button" parent="microbe"]
 offset_left = 208.0
-offset_top = 316.0
+offset_top = 315.0
 offset_right = 953.0
-offset_bottom = 535.0
+offset_bottom = 534.0
+theme_override_fonts/font = ExtResource("1_87jsp")
+theme_override_font_sizes/font_size = 80
 text = "PLAY"
 
 [node name="quitButton" type="Button" parent="microbe"]
@@ -558,6 +560,7 @@ offset_left = 504.0
 offset_top = 565.0
 offset_right = 649.0
 offset_bottom = 629.0
+theme_override_fonts/font = ExtResource("1_87jsp")
 text = "QUIT"
 
 [node name="Label" type="Label" parent="microbe"]
