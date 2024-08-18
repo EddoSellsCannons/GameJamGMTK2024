@@ -1,4 +1,4 @@
-[gd_scene load_steps=72 format=3 uid="uid://bdb2nr0tmenke"]
+[gd_scene load_steps=81 format=3 uid="uid://bdb2nr0tmenke"]
 
 [ext_resource type="Script" path="res://Scenes/title_screen.gd" id="1_8fnmj"]
 [ext_resource type="FontFile" uid="uid://djbx7iebjxc87" path="res://Image & Music/PixelOperator8.ttf" id="1_87jsp"]
@@ -18,8 +18,13 @@
 [ext_resource type="Texture2D" uid="uid://3jc0qe4jcy42" path="res://assets/animal sprites/bear.png" id="16_5x57q"]
 [ext_resource type="Texture2D" uid="uid://cdwjvdbja5mig" path="res://assets/animal sprites/frog.png" id="17_gt32f"]
 [ext_resource type="Texture2D" uid="uid://dp0iww5okpni1" path="res://assets/animal sprites/monkey_tree.png" id="18_y55ud"]
+[ext_resource type="Texture2D" uid="uid://ig7pexd8fxwb" path="res://Image & Music/stamina.png" id="19_3gnsa"]
 [ext_resource type="Texture2D" uid="uid://b2ssm8eg3qi8x" path="res://Image & Music/TextBoxTexture.png" id="19_6cwvq"]
 [ext_resource type="AudioStream" uid="uid://dobwc7wk8qbt" path="res://Image & Music/Music/22 - Dream.ogg" id="20_qpbq0"]
+[ext_resource type="Texture2D" uid="uid://durnkxx0xuiap" path="res://Image & Music/magnifyMinus.png" id="20_ul5d0"]
+[ext_resource type="Texture2D" uid="uid://cf3f11k42aq5p" path="res://Image & Music/magnify.png" id="20_uswnc"]
+[ext_resource type="Texture2D" uid="uid://s7h18bebwhxm" path="res://Image & Music/magnifyPlus.png" id="21_1ceh7"]
+[ext_resource type="Texture2D" uid="uid://f30a3qpqv1vu" path="res://Image & Music/arrowRight.png" id="24_61dlb"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_g07tv"]
 texture = ExtResource("2_dxxsr")
@@ -461,6 +466,74 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_v31d2"]
+texture = ExtResource("19_3gnsa")
+expand_margin_top = 5.0
+expand_margin_bottom = 5.0
+
+[sub_resource type="Animation" id="Animation_5hqb7"]
+resource_name = "arrowSlider"
+length = 3.0
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureRect3:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(116, 29), Vector2(917, 30), Vector2(917, 30)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("TextureRect3:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1, 1.2, 3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_fuxge"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureRect3:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(116, 29)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("TextureRect3:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mldyw"]
+_data = {
+"RESET": SubResource("Animation_fuxge"),
+"arrowSlider": SubResource("Animation_5hqb7")
+}
+
 [node name="titleScreen" type="Node2D"]
 script = ExtResource("1_8fnmj")
 
@@ -726,10 +799,14 @@ zoom = Vector2(0.025, 0.025)
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="HSlider" type="HSlider" parent="CanvasLayer"]
-offset_left = 75.0
-offset_top = 45.0
-offset_right = 1051.0
-offset_bottom = 97.0
+texture_filter = 1
+offset_left = 127.0
+offset_top = 48.0
+offset_right = 987.0
+offset_bottom = 95.0
+theme_override_icons/grabber = ExtResource("20_uswnc")
+theme_override_icons/grabber_highlight = ExtResource("20_uswnc")
+theme_override_styles/slider = SubResource("StyleBoxTexture_v31d2")
 min_value = 0.025
 max_value = 1.0
 step = 0.005
@@ -746,6 +823,36 @@ patch_margin_left = 34
 patch_margin_top = 34
 patch_margin_right = 34
 patch_margin_bottom = 34
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
+texture_filter = 1
+offset_left = 63.0
+offset_top = 42.0
+offset_right = 116.0
+offset_bottom = 99.0
+texture = ExtResource("20_ul5d0")
+
+[node name="TextureRect2" type="TextureRect" parent="CanvasLayer"]
+texture_filter = 1
+offset_left = 1008.0
+offset_top = 45.0
+offset_right = 1061.0
+offset_bottom = 100.0
+texture = ExtResource("21_1ceh7")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer"]
+libraries = {
+"": SubResource("AnimationLibrary_mldyw")
+}
+autoplay = "arrowSlider"
+
+[node name="TextureRect3" type="TextureRect" parent="CanvasLayer"]
+texture_filter = 1
+offset_left = 116.0
+offset_top = 29.0
+offset_right = 205.0
+offset_bottom = 109.0
+texture = ExtResource("24_61dlb")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("20_qpbq0")
