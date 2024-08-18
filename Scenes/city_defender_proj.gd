@@ -11,9 +11,10 @@ func _ready() -> void:
 	if projSpeed < minProjSpeed:
 		projSpeed = minProjSpeed
 
-func _on_area_entered(area: Area2D) -> void:
-	if area.is_in_group("enemy"):
-		area.tookDamage()
-
 func _process(delta: float) -> void:
-	position += projSpeed * dir * delta
+	position += dir * projSpeed * delta
+
+func _on_area_entered(area: Area2D):
+	if area.is_in_group("Player"):
+		area.get_parent().tookDamage()
+		#gameManager.anim_player.play("takeDamagefromPoop")

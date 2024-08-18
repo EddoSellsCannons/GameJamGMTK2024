@@ -1,27 +1,27 @@
 [gd_scene load_steps=12 format=3 uid="uid://c8b4crkc12s3r"]
 
 [ext_resource type="Script" path="res://Scenes/giant_player.gd" id="1_j8yfq"]
-[ext_resource type="Texture2D" uid="uid://cdwjvdbja5mig" path="res://assets/animal sprites/frog.png" id="2_aq43f"]
+[ext_resource type="Texture2D" uid="uid://uina7gstuq4m" path="res://Image & Music/godzilla.png" id="2_hob76"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_c2ssf"]
-size = Vector2(22, 30)
+size = Vector2(30, 26)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_iwa7e"]
-atlas = ExtResource("2_aq43f")
+[sub_resource type="AtlasTexture" id="AtlasTexture_pp4yn"]
+atlas = ExtResource("2_hob76")
 region = Rect2(0, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_dek0j"]
-atlas = ExtResource("2_aq43f")
+[sub_resource type="AtlasTexture" id="AtlasTexture_imk41"]
+atlas = ExtResource("2_hob76")
 region = Rect2(32, 0, 32, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_td4jv"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_iwa7e")
+"texture": SubResource("AtlasTexture_pp4yn")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_dek0j")
+"texture": SubResource("AtlasTexture_imk41")
 }],
 "loop": true,
 "name": &"default",
@@ -29,7 +29,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1r6ue"]
-size = Vector2(22, 30)
+size = Vector2(30, 17)
 
 [sub_resource type="Animation" id="Animation_7j6ut"]
 length = 0.001
@@ -127,7 +127,7 @@ collision_layer = 5
 script = ExtResource("1_j8yfq")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-1.086e-05, 3)
+position = Vector2(-1, 1.00001)
 rotation = 1.5708
 shape = SubResource("RectangleShape2D_c2ssf")
 
@@ -149,7 +149,7 @@ collision_layer = 3
 collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hurtbox"]
-position = Vector2(-2.14577e-06, 2.99999)
+position = Vector2(-3.5, 0.999993)
 rotation = 1.5708
 shape = SubResource("RectangleShape2D_1r6ue")
 

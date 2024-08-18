@@ -30,7 +30,7 @@ func _on_hurtbox_area_entered(area: Area2D) -> void:
 			anim_player.play("eatSomething")
 
 func sizeCompare(enemySize):
-	if size > (enemySize * 0.8):
+	if size  * 0.8 > (enemySize):
 		return true
 	else:
 		return false

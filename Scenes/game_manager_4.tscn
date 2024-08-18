@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://bemlpgq823ak4"]
+[gd_scene load_steps=12 format=3 uid="uid://bemlpgq823ak4"]
 
 [ext_resource type="Script" path="res://Scenes/spawn_manager_lvl4.gd" id="1_7bcd7"]
 [ext_resource type="Script" path="res://Scenes/game_manager_4.gd" id="1_18wxc"]
@@ -70,6 +70,10 @@ terrain_set_0/terrain_0/name = "Terrain 0"
 terrain_set_0/terrain_0/color = Color(0.5, 0.34375, 0.25, 1)
 sources/0 = SubResource("TileSetAtlasSource_cnv6b")
 
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_1gtmy"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_4635g"]
+
 [node name="gameManager4" type="Node2D"]
 script = ExtResource("1_18wxc")
 
@@ -93,6 +97,10 @@ format = 2
 
 [node name="Camera2D" type="Camera2D" parent="giantPlayer"]
 zoom = Vector2(0.5, 0.5)
+limit_left = -10000
+limit_top = -10000
+limit_right = 10000
+limit_bottom = 10000
 limit_smoothed = true
 position_smoothing_enabled = true
 script = ExtResource("4_o1pp6")
@@ -116,9 +124,30 @@ offset_left = -1.0
 offset_top = 566.0
 offset_right = 544.0
 offset_bottom = 646.0
-max_value = 200.0
+max_value = 400.0
 value = 50.0
 nine_patch_stretch = true
 texture_progress = ExtResource("5_jdstr")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(10000, 10000)
+shape = SubResource("WorldBoundaryShape2D_1gtmy")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(10000, -10000)
+rotation = 4.71239
+shape = SubResource("WorldBoundaryShape2D_4635g")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-10000, 10000)
+rotation = 1.5708
+shape = SubResource("WorldBoundaryShape2D_4635g")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-10000, -10000)
+rotation = 3.14159
+shape = SubResource("WorldBoundaryShape2D_4635g")
 
 [connection signal="timeout" from="spawnManager4/spawnTimer" to="spawnManager4" method="_on_spawn_timer_timeout"]

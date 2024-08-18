@@ -1,27 +1,20 @@
-[gd_scene load_steps=7 format=3 uid="uid://cr2qswn5kwmeu"]
+[gd_scene load_steps=6 format=3 uid="uid://caro2rvgp0add"]
 
-[ext_resource type="Script" path="res://Scenes/player_proj.gd" id="1_yiobk"]
-[ext_resource type="Texture2D" uid="uid://bqir2afpxdk5c" path="res://assets/animal sprites/poison.png" id="2_kn75g"]
+[ext_resource type="Script" path="res://Scenes/player_proj_2.gd" id="1_ki3oh"]
+[ext_resource type="Texture2D" uid="uid://xeoxhj52utqn" path="res://Image & Music/godzilla_laser.png" id="2_tkk6y"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_mj61t"]
 radius = 11.0454
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_eapb8"]
-atlas = ExtResource("2_kn75g")
+[sub_resource type="AtlasTexture" id="AtlasTexture_i13xg"]
+atlas = ExtResource("2_tkk6y")
 region = Rect2(0, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_arg2s"]
-atlas = ExtResource("2_kn75g")
-region = Rect2(32, 0, 32, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_wgl4b"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_eapb8")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_arg2s")
+"texture": SubResource("AtlasTexture_i13xg")
 }],
 "loop": true,
 "name": &"default",
@@ -29,7 +22,7 @@ animations = [{
 }]
 
 [node name="playerProj" type="Area2D"]
-script = ExtResource("1_yiobk")
+script = ExtResource("1_ki3oh")
 minProjSpeed = 500
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
