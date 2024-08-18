@@ -119,6 +119,7 @@ script = ExtResource("1_aehoi")
 script = ExtResource("1_g7cea")
 
 [node name="spawnTimer" type="Timer" parent="spawnManager"]
+wait_time = 0.5
 autostart = true
 
 [node name="chunkManager" parent="." node_paths=PackedStringArray("tilemap") instance=ExtResource("3_dt666")]

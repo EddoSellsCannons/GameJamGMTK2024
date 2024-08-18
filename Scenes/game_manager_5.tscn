@@ -1,13 +1,15 @@
-[gd_scene load_steps=27 format=3 uid="uid://bd3wkb7g5oop"]
+[gd_scene load_steps=30 format=3 uid="uid://bd3wkb7g5oop"]
 
 [ext_resource type="Texture2D" uid="uid://t1jrhdi2vg3p" path="res://Image & Music/city_road.png" id="1_8kvt1"]
 [ext_resource type="Script" path="res://Scenes/game_manager_5.gd" id="1_jhn20"]
 [ext_resource type="Texture2D" uid="uid://b2ssm8eg3qi8x" path="res://Image & Music/TextBoxTexture.png" id="2_frh43"]
-[ext_resource type="Texture2D" uid="uid://buxgxql60ip8w" path="res://Image & Music/floor.png" id="3_3y341"]
+[ext_resource type="Texture2D" uid="uid://ndoqlh4ywxdh" path="res://Image & Music/sunset.png" id="2_wrsh5"]
+[ext_resource type="Texture2D" uid="uid://buxgxql60ip8w" path="res://Image & Music/floor_old.png" id="3_3y341"]
 [ext_resource type="Script" path="res://Scenes/cutscene_player.gd" id="3_7qllb"]
 [ext_resource type="FontFile" uid="uid://djbx7iebjxc87" path="res://Image & Music/PixelOperator8.ttf" id="3_ryand"]
 [ext_resource type="Texture2D" uid="uid://uina7gstuq4m" path="res://Image & Music/godzilla.png" id="3_ywsjb"]
 [ext_resource type="AudioStream" uid="uid://ym3lqha2myoa" path="res://Image & Music/Music/8 - End Theme.ogg" id="4_75bvm"]
+[ext_resource type="Texture2D" uid="uid://cu1ceqanscphh" path="res://Image & Music/floor2.png" id="5_blwmu"]
 [ext_resource type="PackedScene" uid="uid://dgfnnljlldlg6" path="res://Scenes/all_sfx.tscn" id="6_84dn0"]
 [ext_resource type="Texture2D" uid="uid://c2y4jxa0dqjrq" path="res://Image & Music/cutscene.png" id="8_ipthm"]
 [ext_resource type="Texture2D" uid="uid://f8ff7yukj1h6" path="res://Image & Music/space.png" id="8_mjga3"]
@@ -51,8 +53,14 @@ texture = ExtResource("3_3y341")
 0:0/size_in_atlas = Vector2i(4, 4)
 0:0/0 = 0
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_2y1kb"]
+texture = ExtResource("5_blwmu")
+0:0/size_in_atlas = Vector2i(4, 4)
+0:0/0 = 0
+
 [sub_resource type="TileSet" id="TileSet_iq3w1"]
 sources/0 = SubResource("TileSetAtlasSource_d48l5")
+sources/1 = SubResource("TileSetAtlasSource_2y1kb")
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_r33o1"]
 atlas = ExtResource("3_ywsjb")
@@ -190,21 +198,6 @@ tracks/8/keys = {
 "values": [-10.0]
 }
 
-[sub_resource type="Animation" id="Animation_bdwuc"]
-resource_name = "startLevel"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("CanvasLayer/ColorRect:color")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
-}
-
 [sub_resource type="Animation" id="Animation_ui7oh"]
 resource_name = "beginFinalCutscene"
 length = 15.0
@@ -332,6 +325,21 @@ tracks/9/keys = {
 "values": [-10.0, -10.0, -80.0]
 }
 
+[sub_resource type="Animation" id="Animation_bdwuc"]
+resource_name = "startLevel"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_c1coe"]
 _data = {
 "RESET": SubResource("Animation_gfkic"),
@@ -341,6 +349,12 @@ _data = {
 
 [node name="gameManager5" type="Node2D"]
 script = ExtResource("1_jhn20")
+
+[node name="TextureRect3" type="Sprite2D" parent="."]
+z_index = -3
+position = Vector2(241, -139)
+scale = Vector2(0.9, 0.66875)
+texture = ExtResource("2_wrsh5")
 
 [node name="TileMap" type="TileMap" parent="."]
 texture_filter = 1
@@ -353,7 +367,7 @@ z_index = -2
 texture_filter = 1
 tile_set = SubResource("TileSet_iq3w1")
 format = 2
-layer_0/tile_data = PackedInt32Array(-65548, 0, 0, -65547, 0, 0, -65546, 0, 0, -65545, 0, 0, -65544, 0, 0, -65543, 0, 0, -65542, 0, 0, -65541, 0, 0, -65540, 0, 0, -65539, 0, 0, -65538, 0, 0, -65537, 0, 0, -131072, 0, 0, -131071, 0, 0, -131070, 0, 0, -131069, 0, 0, -131068, 0, 0, -131067, 0, 0, -131066, 0, 0, -131065, 0, 0, -131064, 0, 0, -131063, 0, 0, -131062, 0, 0, -131061, 0, 0, -131060, 0, 0, -131059, 0, 0, -131058, 0, 0, -131057, 0, 0, -131056, 0, 0, -131055, 0, 0, -131054, 0, 0, -131053, 0, 0, -131052, 0, 0, -131051, 0, 0, -131050, 0, 0, -131049, 0, 0, -131048, 0, 0, -131047, 0, 0, -131046, 0, 0, -131045, 0, 0, -131044, 0, 0, -131043, 0, 0, -131042, 0, 0, -131041, 0, 0, -131040, 0, 0, -131039, 0, 0, -131038, 0, 0, -131037, 0, 0, -131036, 0, 0, -131035, 0, 0, -131034, 0, 0, -131033, 0, 0)
+layer_0/tile_data = PackedInt32Array(-65548, 1, 0, -65544, 1, 0, -65540, 1, 0, -131072, 1, 0, -131068, 1, 0, -131064, 1, 0, -131060, 1, 0, -131056, 1, 0, -131052, 1, 0, -131048, 1, 0, -131044, 1, 0, -131040, 1, 0, -131036, 1, 0, -131032, 1, 0)
 
 [node name="Cutscene player" type="CharacterBody2D" parent="."]
 z_index = -1

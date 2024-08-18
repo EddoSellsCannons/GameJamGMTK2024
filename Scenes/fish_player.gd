@@ -31,7 +31,7 @@ func handleInput():
 	velocity = moveDir * speed
 	if moveDir.x > 0:
 		$Sprite2D.flip_h = false
-	else:
+	elif moveDir.x < 0:
 		$Sprite2D.flip_h = true
 	if Input.is_action_pressed("ui_accept"):
 		dash()
@@ -78,4 +78,4 @@ func dash():
 		
 func regenStamina():
 	if stamina <= 100:
-		stamina += 0.2
+		stamina += 0.6

@@ -132,6 +132,7 @@ format = 2
 script = ExtResource("2_g8uxs")
 
 [node name="spawnTimer" type="Timer" parent="spawnManager"]
+wait_time = 0.5
 autostart = true
 
 [node name="fishPlayer" parent="." instance=ExtResource("1_fdjib")]
