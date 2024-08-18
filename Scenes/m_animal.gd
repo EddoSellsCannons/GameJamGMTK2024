@@ -33,9 +33,9 @@ func _on_area_entered(area: Area2D) -> void:
 	
 func _process(delta: float) -> void:
 	if playerDetected:
-		if gameManager.player.size < size/80 * 100:
+		if gameManager.player.size < size * 0.8:
 			position += (gameManager.player.position - position).normalized() * maxSpeed * delta
-		elif gameManager.player.size > size/80 * 100:
+		elif gameManager.player.size * 0.8 > size:
 			position -= (gameManager.player.position - position).normalized() * maxSpeed * 2 * delta
 		else:
 			playerDetected = false
@@ -48,7 +48,7 @@ func _process(delta: float) -> void:
 		$AnimatedSprite2D.flip_h = true
 
 func compareSize(playerSize):
-	if size > (playerSize/80 * 100):
+	if size  * 0.8> (playerSize):
 		return true
 	else:
 		return false

@@ -1,13 +1,14 @@
-[gd_scene load_steps=9 format=3 uid="uid://dqkha8tf211ny"]
+[gd_scene load_steps=10 format=3 uid="uid://dqkha8tf211ny"]
 
 [ext_resource type="Script" path="res://Scenes/tree_obstacle.gd" id="1_7cph6"]
 [ext_resource type="Texture2D" uid="uid://dp0iww5okpni1" path="res://assets/animal sprites/monkey_tree.png" id="2_db45s"]
+[ext_resource type="AudioStream" uid="uid://mjw4b0muy1et" path="res://Image & Music/SoundFX/Fireball.wav" id="3_khjio"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v8geh"]
 size = Vector2(149, 159)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_40fn8"]
-radius = 395.011
+radius = 450.04
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_caxm1"]
 size = Vector2(150, 160)
@@ -56,6 +57,20 @@ tracks/1/keys = {
 "method": &"launchProj"
 }]
 }
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AudioStreamPlayer2D")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.8),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [0.0],
+"method": &"play"
+}]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_f0n1q"]
 _data = {
@@ -92,6 +107,10 @@ shape = SubResource("RectangleShape2D_caxm1")
 libraries = {
 "": SubResource("AnimationLibrary_f0n1q")
 }
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_khjio")
+pitch_scale = 3.0
 
 [connection signal="area_entered" from="detectionRadius" to="." method="_on_detection_radius_area_entered"]
 [connection signal="area_entered" from="trampleZone" to="." method="_on_trample_zone_area_entered"]

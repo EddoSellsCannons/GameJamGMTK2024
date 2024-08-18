@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://fbeh5s7mofad"
+path="res://.godot/imported/Magic3.wav-7dae46e938db4adfad9b9141c1a714b4.sample"
+
+[deps]
+
+source_file="res://Image & Music/SoundFX/Magic3.wav"
+dest_files=["res://.godot/imported/Magic3.wav-7dae46e938db4adfad9b9141c1a714b4.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

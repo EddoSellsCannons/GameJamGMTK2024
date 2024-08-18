@@ -23,7 +23,7 @@ var stamina = STAMINA_CAP
 
 func _ready() -> void:
 	updateSizing()
-	speed = (size/80 * 100)
+	speed = (size * 0.8)
 
 func _physics_process(delta: float) -> void:
 	handleInput()
@@ -44,19 +44,21 @@ func _on_hurtbox_area_entered(area: Area2D) -> void:
 	if area.is_in_group("enemy"):
 		if sizeCompare(area.size):
 			size += area.maxSize * sizeConsumeMultiplier
-			speed = (size/80 * 100) #80% of size
+			speed = (size * 0.8) #80% of size
 			area.queue_free()
 			updateSizing()
 			anim_player.play("eatSomething")
+			gameManager.all_sfx.playEatSound()
 
 func sizeCompare(enemySize):
-	if size > (enemySize/80 * 100):
+	if size * 0.8 > (enemySize):
 		return true
 	else:
 		return false
 
 func updateSizing():
 	scale = Vector2(size/100, size/100)
+	speed = (size * 0.8)
 	#$Camera2D.zoom = Vector2(1 - size/1000, 1 - size/1000)
 
 func tookDamage():
@@ -66,6 +68,7 @@ func tookDamage():
 		size *= 0.9
 	updateSizing()
 	anim_player.play("damageTaken")
+	gameManager.all_sfx.playHurtSound()
 	isInvul = true
 	invulTimer.start()
 	await invulTimer.timeout
@@ -79,7 +82,7 @@ func dash():
 		
 func regenStamina():
 	if stamina <= STAMINA_CAP:
-		stamina += 0.6
+		stamina += 0.8
 
 func shootProj(dir):
 	if stamina - SHOOT_COST > 0:
@@ -87,7 +90,9 @@ func shootProj(dir):
 		var proj = playerProj.instantiate()
 		proj.position = position
 		proj.dir = dir
+		proj.size = size
 		gameManager.add_child(proj)
+		gameManager.all_sfx.playShootPoisonSound()
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.pressed:

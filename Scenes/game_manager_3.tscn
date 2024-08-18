@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://ts58moqxvisn"]
+[gd_scene load_steps=20 format=3 uid="uid://ts58moqxvisn"]
 
 [ext_resource type="Script" path="res://Scenes/game_manager_3.gd" id="1_a23m5"]
 [ext_resource type="Script" path="res://Scenes/spawn_manager_lvl3.gd" id="2_htlu3"]
@@ -7,6 +7,11 @@
 [ext_resource type="PackedScene" uid="uid://dptep1rhdosqc" path="res://Scenes/frogPlayer.tscn" id="3_iu027"]
 [ext_resource type="Script" path="res://Scenes/camera_2d.gd" id="4_1wmpi"]
 [ext_resource type="Texture2D" uid="uid://ig7pexd8fxwb" path="res://Image & Music/stamina.png" id="5_yxugy"]
+[ext_resource type="Texture2D" uid="uid://bnurm3uwu7vyq" path="res://Image & Music/scale.png" id="8_fhjii"]
+[ext_resource type="FontFile" uid="uid://djbx7iebjxc87" path="res://Image & Music/PixelOperator8.ttf" id="9_gl128"]
+[ext_resource type="Texture2D" uid="uid://b2ssm8eg3qi8x" path="res://Image & Music/TextBoxTexture.png" id="10_1nuj1"]
+[ext_resource type="PackedScene" uid="uid://dgfnnljlldlg6" path="res://Scenes/all_sfx.tscn" id="11_8mgxv"]
+[ext_resource type="AudioStream" uid="uid://vfoa4prnt6lx" path="res://Image & Music/Music/30 - Ruins.ogg" id="12_mqedn"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_n3na8"]
 texture = ExtResource("3_gc7vr")
@@ -19,6 +24,45 @@ texture_region_size = Vector2i(32, 32)
 [sub_resource type="TileSet" id="TileSet_ie6es"]
 tile_size = Vector2i(32, 32)
 sources/0 = SubResource("TileSetAtlasSource_n3na8")
+
+[sub_resource type="Animation" id="Animation_plnio"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.4, 0.290196, 0.133333, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../frogPlayer/Camera2D:zoom")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.8, 0.8)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("levelTransitionColor:color")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
 
 [sub_resource type="Animation" id="Animation_fha4v"]
 resource_name = "takeDamagefromPoop"
@@ -37,24 +81,67 @@ tracks/0/keys = {
 "values": [Color(0.4, 0.290196, 0.133333, 0.784314), Color(0.4, 0.290196, 0.133333, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_plnio"]
-length = 0.001
+[sub_resource type="Animation" id="Animation_3o7oe"]
+resource_name = "levelTransition"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("ColorRect:color")
+tracks/0/path = NodePath("../frogPlayer/Camera2D:zoom")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.8),
+"transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Color(0.4, 0.290196, 0.133333, 0)]
+"values": [Vector2(0.8, 0.8), Vector2(0.08, 0.08)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("levelTransitionColor:color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("..")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"next_level"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_sj77o"]
+resource_name = "startLevel"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("levelTransitionColor:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(-0.0333333, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_l7f85"]
 _data = {
 "RESET": SubResource("Animation_plnio"),
+"levelTransition": SubResource("Animation_3o7oe"),
+"startLevel": SubResource("Animation_sj77o"),
 "takeDamagefromPoop": SubResource("Animation_fha4v")
 }
 
@@ -99,9 +186,52 @@ position = Vector2(-1000, 0)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
+[node name="popUp" type="NinePatchRect" parent="CanvasLayer"]
+process_mode = 3
+texture_filter = 1
+offset_left = 106.0
+offset_top = 47.0
+offset_right = 1091.0
+offset_bottom = 598.0
+texture = ExtResource("10_1nuj1")
+patch_margin_left = 34
+patch_margin_top = 34
+patch_margin_right = 34
+patch_margin_bottom = 34
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/popUp"]
+layout_mode = 0
+offset_left = 48.0
+offset_top = 45.0
+offset_right = 941.0
+offset_bottom = 434.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_fonts/normal_font = ExtResource("9_gl128")
+theme_override_font_sizes/normal_font_size = 32
+text = "Text two three four
+eight nine 
+six seven dog cat horse
+
+rodeo 
+
+eat "
+
+[node name="Button" type="Button" parent="CanvasLayer/popUp"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 388.0
+offset_top = 457.0
+offset_right = 609.0
+offset_bottom = 513.0
+theme_override_fonts/font = ExtResource("9_gl128")
+theme_override_font_sizes/font_size = 32
+text = "GO!"
+
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
 offset_right = 1151.0
 offset_bottom = 650.0
+mouse_filter = 2
 color = Color(0.4, 0.290196, 0.133333, 0)
 
 [node name="TextureProgressBar" type="TextureProgressBar" parent="CanvasLayer"]
@@ -110,13 +240,60 @@ offset_top = 566.0
 offset_right = 544.0
 offset_bottom = 646.0
 max_value = 200.0
-value = 50.0
 nine_patch_stretch = true
 texture_progress = ExtResource("5_yxugy")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer"]
+process_mode = 3
 libraries = {
 "": SubResource("AnimationLibrary_l7f85")
 }
 
+[node name="levelTransitionColor" type="ColorRect" parent="CanvasLayer"]
+offset_right = 1152.0
+offset_bottom = 648.0
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[node name="scale" type="TextureRect" parent="CanvasLayer"]
+texture_filter = 1
+offset_left = 1019.0
+offset_top = 533.0
+offset_right = 1146.0
+offset_bottom = 636.0
+texture = ExtResource("8_fhjii")
+
+[node name="Label" type="Label" parent="CanvasLayer/scale"]
+layout_mode = 0
+offset_left = 41.0
+offset_top = 62.0
+offset_right = 95.0
+offset_bottom = 110.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_fonts/font = ExtResource("9_gl128")
+theme_override_font_sizes/font_size = 40
+text = "m
+"
+
+[node name="Label2" type="Label" parent="CanvasLayer/scale"]
+layout_mode = 0
+offset_left = 23.0
+offset_top = 102.0
+offset_right = 104.0
+offset_bottom = 110.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("9_gl128")
+theme_override_font_sizes/font_size = 8
+text = "*not to scale"
+
+[node name="allSFX" parent="." instance=ExtResource("11_8mgxv")]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("12_mqedn")
+volume_db = -10.0
+autoplay = true
+
 [connection signal="timeout" from="spawnManager/spawnTimer" to="spawnManager" method="_on_spawn_timer_timeout"]
+[connection signal="button_down" from="CanvasLayer/popUp/Button" to="." method="_on_button_button_down"]
