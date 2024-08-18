@@ -39,7 +39,7 @@ func _on_area_entered(area: Area2D) -> void:
 	
 func _process(delta: float) -> void:
 	if isCharging:
-		position += dir * maxSpeed * 8 * delta
+		position += dir * maxSpeed * randi_range(6, 10) * delta
 		return
 	if playerDetected:
 		player_noticed_notif.visible = true
@@ -67,9 +67,7 @@ func _on_area_2d_area_entered(area: Area2D) -> void: #Detection rad
 		player_detected_timer.start()
 
 func _on_speed_randomise_timer_timeout() -> void:
-	pass
-	#speed = rng.randf_range(maxSpeed/2, maxSpeed)
-	#dir = Vector2(rng.randf_range(-1.0,1.0), rng.randf_range(-1.0,1.0))
+	speed = rng.randf_range(maxSpeed/2, maxSpeed)
 
 func _on_player_detected_timer_timeout() -> void:
 	playerDetected = false

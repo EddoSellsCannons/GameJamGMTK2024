@@ -16,20 +16,22 @@ func _ready() -> void:
 	await get_tree().create_timer(0.5).timeout 
 	spawnObstacles()
 	for i in range(50):
-		spawnEnemy()
+		spawnEnemy(0)
 
 func _on_spawn_timer_timeout() -> void:
-	spawnEnemy()
+	spawnEnemy(-1)
 
-func spawnEnemy():
+func spawnEnemy(index):
 	var fishTypeToSpawn = rng.randi_range(0, 100)
 	var fishIndex
-	if fishTypeToSpawn >= 0 and fishTypeToSpawn <= 70:
+	if fishTypeToSpawn >= 0 and fishTypeToSpawn <= 60:
 		fishIndex = 0
-	elif fishTypeToSpawn >= 71 and fishTypeToSpawn <= 97:
+	elif fishTypeToSpawn >= 61 and fishTypeToSpawn <= 90:
 		fishIndex = 1
-	elif fishTypeToSpawn >= 98 and fishTypeToSpawn <= 100:
+	elif fishTypeToSpawn >= 91 and fishTypeToSpawn <= 100:
 		fishIndex = 2
+	if index >= 0:
+		fishIndex = index
 	var enemyToAdd = enemyList[fishIndex].instantiate()
 	var posToSpawn = get_tree().get_nodes_in_group("spawnpoint").pick_random().position
 	enemyToAdd.position = posToSpawn

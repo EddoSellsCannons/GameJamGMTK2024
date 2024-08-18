@@ -72,7 +72,7 @@ _data = {
 
 [node name="L_cityDefender" type="Area2D" groups=["enemy"]]
 script = ExtResource("1_4754e")
-maxSpeed = 500.0
+maxSpeed = 600.0
 maxSize = 1500.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -109,7 +109,7 @@ collision_mask = 2
 shape = SubResource("CircleShape2D_6bpl4")
 
 [node name="speedRandomiseTimer" type="Timer" parent="."]
-wait_time = 3.0
+wait_time = 9.0
 autostart = true
 
 [node name="playerDetectedTimer" type="Timer" parent="."]

@@ -1,0 +1,89 @@
+[gd_scene load_steps=7 format=3 uid="uid://1e2da86nlqi0"]
+
+[ext_resource type="Script" path="res://Scenes/l_burger.gd" id="1_bcbcx"]
+[ext_resource type="Texture2D" uid="uid://c8hdg53ap0x1p" path="res://Image & Music/burger.png" id="2_dqich"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_vhh03"]
+radius = 57.3333
+height = 142.667
+
+[sub_resource type="Animation" id="Animation_pfeft"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sprite/ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.588235, 0, 0.596078, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_j0x5m"]
+resource_name = "enemyTooKDamage"
+length = 0.2
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sprite/ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0.588235, 0, 0.596078, 0.784314), Color(0.161863, 0.400458, 0.174916, 0.784314)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vdvym"]
+_data = {
+"RESET": SubResource("Animation_pfeft"),
+"enemyTooKDamage": SubResource("Animation_j0x5m")
+}
+
+[node name="burgerShop" type="Area2D" groups=["enemy"]]
+scale = Vector2(3, 3)
+collision_layer = 4
+collision_mask = 4
+script = ExtResource("1_bcbcx")
+maxSize = 200.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_vhh03")
+
+[node name="sprite" type="Sprite2D" parent="."]
+clip_children = 2
+texture_filter = 1
+scale = Vector2(5, 5)
+texture = ExtResource("2_dqich")
+
+[node name="ColorRect" type="ColorRect" parent="sprite"]
+offset_left = -37.0
+offset_top = -19.0
+offset_right = 38.0
+offset_bottom = 21.0
+color = Color(0.588235, 0, 0.596078, 0)
+
+[node name="speedRandomiseTimer" type="Timer" parent="."]
+wait_time = 3.0
+autostart = true
+
+[node name="playerDetectedTimer" type="Timer" parent="."]
+wait_time = 3.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_vdvym")
+}
+
+[node name="tookDamageTimer" type="Timer" parent="."]
+wait_time = 0.5
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="timeout" from="speedRandomiseTimer" to="." method="_on_speed_randomise_timer_timeout"]
+[connection signal="timeout" from="playerDetectedTimer" to="." method="_on_player_detected_timer_timeout"]

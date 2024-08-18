@@ -9,6 +9,8 @@ var dashMultiplier = 3
 @onready var anim_player = $AnimationPlayer
 @onready var invulTimer = $invulTimer
 
+@onready var gameManager = $".."
+
 var isInvul: bool
 
 var moveDir
@@ -42,6 +44,7 @@ func _on_hurtbox_area_entered(area: Area2D) -> void:
 			area.queue_free()
 			updateSizing()
 			anim_player.play("eatSomething")
+			gameManager.all_sfx.playEatSound()
 
 func sizeCompare(enemySize):
 	if size  * 0.8> (enemySize):
@@ -61,6 +64,7 @@ func tookDamage():
 		size *= 0.9
 	updateSizing()
 	anim_player.play("damageTaken")
+	gameManager.all_sfx.playHurtSound()
 	isInvul = true
 	invulTimer.start()
 	await invulTimer.timeout

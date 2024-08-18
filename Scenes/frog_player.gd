@@ -48,6 +48,7 @@ func _on_hurtbox_area_entered(area: Area2D) -> void:
 			area.queue_free()
 			updateSizing()
 			anim_player.play("eatSomething")
+			gameManager.all_sfx.playEatSound()
 
 func sizeCompare(enemySize):
 	if size * 0.8 > (enemySize):
@@ -67,6 +68,7 @@ func tookDamage():
 		size *= 0.9
 	updateSizing()
 	anim_player.play("damageTaken")
+	gameManager.all_sfx.playHurtSound()
 	isInvul = true
 	invulTimer.start()
 	await invulTimer.timeout
@@ -80,7 +82,7 @@ func dash():
 		
 func regenStamina():
 	if stamina <= STAMINA_CAP:
-		stamina += 0.6
+		stamina += 0.8
 
 func shootProj(dir):
 	if stamina - SHOOT_COST > 0:
@@ -90,6 +92,7 @@ func shootProj(dir):
 		proj.dir = dir
 		proj.size = size
 		gameManager.add_child(proj)
+		gameManager.all_sfx.playShootPoisonSound()
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.pressed:

@@ -1,0 +1,27 @@
+[gd_scene load_steps=6 format=3 uid="uid://dgfnnljlldlg6"]
+
+[ext_resource type="AudioStream" uid="uid://dt15pe7teh3j0" path="res://Image & Music/SoundFX/Hit.wav" id="1_pumrc"]
+[ext_resource type="Script" path="res://Scenes/all_sfx.gd" id="1_xe3uk"]
+[ext_resource type="AudioStream" uid="uid://cuak4n6hs24tm" path="res://Image & Music/SoundFX/MiniImpact.wav" id="2_hqbrp"]
+[ext_resource type="AudioStream" uid="uid://mjw4b0muy1et" path="res://Image & Music/SoundFX/Fireball.wav" id="4_v8mf3"]
+[ext_resource type="AudioStream" uid="uid://fbeh5s7mofad" path="res://Image & Music/SoundFX/Magic3.wav" id="5_qmed1"]
+
+[node name="allSFX" type="Node"]
+script = ExtResource("1_xe3uk")
+
+[node name="hurtSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("1_pumrc")
+pitch_scale = 3.0
+
+[node name="eatEnemySound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_hqbrp")
+pitch_scale = 2.0
+
+[node name="shootPoison" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_v8mf3")
+pitch_scale = 3.0
+
+[node name="shootLaser" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_qmed1")
+volume_db = -10.0
+pitch_scale = 10.0

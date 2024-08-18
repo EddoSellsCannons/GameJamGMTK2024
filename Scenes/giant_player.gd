@@ -1,11 +1,11 @@
 extends CharacterBody2D
 
-const STAMINA_CAP = 400.0
+const STAMINA_CAP = 300.0
 const SHOOT_COST = 20.0
 
 var speed = 100.0
-var size = 1000.0
-const sizeConsumeMultiplier = 1
+var size = 600.0
+const sizeConsumeMultiplier = 0.5
 
 var dashMultiplier = 3
 
@@ -47,6 +47,7 @@ func _on_hurtbox_area_entered(area: Area2D) -> void:
 			area.queue_free()
 			updateSizing()
 			anim_player.play("eatSomething")
+			gameManager.all_sfx.playEatSound()
 
 func sizeCompare(enemySize):
 	if size  * 0.8> (enemySize):
@@ -66,6 +67,7 @@ func tookDamage():
 		size *= 0.9
 	updateSizing()
 	anim_player.play("damageTaken")
+	gameManager.all_sfx.playHurtSound()
 	isInvul = true
 	invulTimer.start()
 	await invulTimer.timeout
@@ -75,7 +77,7 @@ func tookDamage():
 func dash():
 	if stamina > 0:
 		velocity += moveDir * speed * dashMultiplier
-		stamina -= 1.2
+		stamina -= 1.5
 		
 func regenStamina():
 	if stamina <= STAMINA_CAP:
@@ -89,6 +91,7 @@ func shootProj(dir):
 		proj.dir = dir
 		proj.size = size
 		gameManager.add_child(proj)
+		gameManager.all_sfx.playShootLaserSound()
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.pressed:
